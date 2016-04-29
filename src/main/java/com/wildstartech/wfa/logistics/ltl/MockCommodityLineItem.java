@@ -52,7 +52,6 @@ implements CommodityLineItem {
    private int quantity=0;
    private int weight=0;
    private int width=0;
-   private String description="";
    private String packagingType = "";
    private String productId="";
    
@@ -67,16 +66,6 @@ implements CommodityLineItem {
       return (this.length*this.width*this.height)/(12*12*12);
    }
 
-   //***** description
-   @Override
-   public String getDescription() {
-      return this.description;
-   }
-   
-   @Override
-   public void setDescription(String description) {
-      this.description=description;      
-   }
    //***** height
    @Override
    public int getHeight() {

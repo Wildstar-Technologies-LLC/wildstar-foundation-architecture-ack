@@ -46,6 +46,7 @@ package com.wildstartech.wfa.logistics.ltl;
 
 public class MockLineItem implements LineItem {
    private int lineItemNumber=-1;
+   private String description="";
    
    /**
     * Default, no-argument constructor.
@@ -57,6 +58,19 @@ public class MockLineItem implements LineItem {
    public MockLineItem(int lineItemNumber) {
       this.lineItemNumber=lineItemNumber;
    }
+   
+   //***** description
+   @Override
+   public String getDescription() {
+      return this.description;
+   }
+   
+   @Override
+   public void setDescription(String description) {
+      this.description=description;      
+   }
+   
+   //***** lineItemNumber
    @Override
    public int getLineItemNumber() {
       return this.lineItemNumber;
@@ -67,6 +81,7 @@ public class MockLineItem implements LineItem {
       this.lineItemNumber=lineItem;
    }
    
+   //***** toPropertyString
    public String toPropertyString() {
       StringBuilder sb=null;
       
@@ -75,6 +90,7 @@ public class MockLineItem implements LineItem {
       
       return sb.toString();
    }
+   //***** toString
    public String toString() {
       StringBuilder sb=null;
       sb=new StringBuilder(1024);

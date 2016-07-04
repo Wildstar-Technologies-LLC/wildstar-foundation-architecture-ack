@@ -45,7 +45,6 @@
 package com.wildstartech.wfa.dao.logistics.ltl;
 
 import java.util.Date;
-import java.util.List;
 
 import org.testng.annotations.Test;
 
@@ -56,6 +55,7 @@ import com.wildstartech.wfa.dao.WildDAOTest;
 import com.wildstartech.wfa.dao.WildObject;
 import com.wildstartech.wfa.finance.ChargeDescriptionTooLongException;
 import com.wildstartech.wfa.logistics.ltl.AccessorialCharge;
+
 /**
  * Test case for the GAE implementation of the<code>AccessorialDAO</code> class.
  * 
@@ -63,128 +63,101 @@ import com.wildstartech.wfa.logistics.ltl.AccessorialCharge;
  * @version 1.0
  */
 public class AccessorialDAOTest extends WildDAOTest {
-  AccessorialCharge charge=null;
-  // Test Case 1 Data
-  double test1Amount=100.52;
-  int test1Quantity=100;
-  String test1Description="This is a test description.";
-  String test1QuoteIdentifier="100";
-  
-  @Test
-  public void testCreate() {
-    AccessorialCharge charge=null;
-    AccessorialChargeDAO dao=null;
-    AccessorialChargeDAOFactory factory=null;
-    
-    factory=new AccessorialChargeDAOFactory();
-    dao=factory.getDAO();
-    assert dao != null;
-    assert dao instanceof AccessorialChargeDAO;
-    charge=dao.create();
-    assert charge != null;
-    assert charge instanceof AccessorialCharge;
-    assert charge instanceof PersistentAccessorialCharge;
-    assert charge instanceof WildObject;
-    assert charge instanceof PersistentAccessorialCharge;
-    this.charge=charge;
-  }
-  
-  @Test(dependsOnMethods = { "testCreate" })
-  public void testSave() {
-    AccessorialChargeDAO dao=null;
-    Date createDate=null;
-    Date modifiedDate=null;
-    PersistentAccessorialCharge pCharge=null;
-    UserContext ctx=null;
-    
-    ctx=UserContextDAOFactory.authenticate(UserData.getAdminUserName(),
-        UserData.getAdminPassword());
-    pCharge=(PersistentAccessorialCharge) this.charge;
-    pCharge.setAmount(this.test1Amount);
-    try {
-      pCharge.setDescription(this.test1Description);
-    } catch (ChargeDescriptionTooLongException ex) {
-      // No-Op
-    }
-    pCharge.setQuantity(this.test1Quantity);
-    pCharge.setQuoteIdentifier(this.test1QuoteIdentifier);  
-    dao=new AccessorialChargeDAOFactory().getDAO();
-    pCharge=(PersistentAccessorialCharge)dao.save(pCharge,ctx);
-    assert pCharge != null;
-    assert pCharge.getAmount().doubleValue() == this.test1Amount;
-    assert pCharge.getDescription().equals(this.test1Description);
-    assert pCharge.getQuantity() == this.test1Quantity;
-    assert pCharge.getIdentifier() != null;
-    // Ensure the user who modified the object is the admin user
-    assert pCharge.getModifiedBy().compareTo(UserData.getAdminUserName()) == 0;
-    // Validate dateCreated
-    createDate=pCharge.getDateCreated();
-    assert createDate != null;
-    /* Ensure the value stored as the dateCreated is within 1000 milliseconds of
-     * the present. */
-    //assert new Date().getTime() - 1000 <= createDate.getTime();
-    // Validate dateModified
-    modifiedDate=pCharge.getDateModified();
-    assert modifiedDate != null;
-    // Ensure the modified date is equal to the createDate.
-    assert modifiedDate.getTime() == createDate.getTime();
-    // Update the refernce to the instance-level charge to be the saved version
-    // of the charge.
-    this.charge=pCharge;
-  }
-  
-  @Test(dependsOnMethods = {"testSave"})
-  public void testFindInstance() {
-    AccessorialCharge template=null;
-    PersistentAccessorialCharge foundCharge=null;
-    AccessorialChargeDAO dao=null;
-    UserContext ctx=null;
-    
-    ctx=UserContextDAOFactory.authenticate(UserData.getAdminUserName(),
-        UserData.getAdminPassword());
-    dao=new AccessorialChargeDAOFactory().getDAO();
-    template=dao.create();
-    template.setAmount(this.test1Amount);
-    template.setQuantity(this.test1Quantity);
-    ((PersistentAccessorialCharge)template).setQuoteIdentifier(
-        this.test1QuoteIdentifier);
-    try {
-      template.setDescription(this.test1Description);
-    } catch (ChargeDescriptionTooLongException ex) {
-      // No-Op
-    }
-    foundCharge=dao.findInstance(template,ctx);
-    assert foundCharge !=null;
-    assert foundCharge.getAmount().doubleValue() == 
-        template.getAmount().doubleValue();
-    assert foundCharge.getDescription().equals(template.getDescription());
-    assert foundCharge.getQuantity() == template.getQuantity();
-    assert 
-      ((PersistentAccessorialCharge)foundCharge).getQuoteIdentifier().equals(
-        ((PersistentAccessorialCharge)template).getQuoteIdentifier());
-    assert foundCharge.getIdentifier().equals(
-        ((PersistentAccessorialCharge)this.charge).getIdentifier()
-    );
-  }
-  @Test(dependsOnMethods = {"testSave","testFindInstance"})
-  public void testFindByQuoteIdentifier() {
-    PersistentAccessorialCharge foundCharge=null;
-    AccessorialChargeDAO dao=null;
-    List<PersistentAccessorialCharge> charges=null;
-    UserContext ctx=null;
-    
-    ctx=UserContextDAOFactory.authenticate(UserData.getAdminUserName(),
-        UserData.getAdminPassword());
-    dao=new AccessorialChargeDAOFactory().getDAO();
-    charges=dao.findByQuoteIdentifier(this.test1QuoteIdentifier,ctx);
-    assert charges != null;
-    assert charges.size() > 0;
-    foundCharge=(PersistentAccessorialCharge) charges.get(0);
-    assert foundCharge.getAmount().doubleValue() == this.test1Amount;
-    assert foundCharge.getQuantity() == this.test1Quantity;
-    assert foundCharge.getDescription().equals(this.test1Description);
-    assert foundCharge.getQuoteIdentifier().equals(this.test1QuoteIdentifier);
-    assert foundCharge.getIdentifier().equals(
-        ((PersistentAccessorialCharge) charge).getIdentifier());
-  }
+	@Test
+	public void testFactory() {
+		AccessorialChargeDAO dao = null;
+		AccessorialChargeDAOFactory factory = null;
+		factory = new AccessorialChargeDAOFactory();
+		dao = factory.getDAO();
+		assert dao != null;
+	}
+
+	@Test(dependsOnMethods = { "testFactory" })
+	public void testCreate() {
+		AccessorialCharge charge = null;
+		AccessorialChargeDAO dao = null;
+		AccessorialChargeDAOFactory factory = null;
+
+		factory = new AccessorialChargeDAOFactory();
+		dao = factory.getDAO();
+		charge = dao.create();
+		assert charge != null;
+		assert charge instanceof AccessorialCharge;
+		assert charge instanceof PersistentAccessorialCharge;
+		assert charge instanceof WildObject;
+		assert charge instanceof PersistentAccessorialCharge;
+	}
+
+	@Test(dependsOnMethods = { "testCreate" })
+	public void testSave() {
+		AccessorialCharge charge=null;
+		AccessorialCharge testCharge = null;
+		AccessorialChargeDAO dao = null;
+		AccessorialChargeDAOFactory factory = null;
+		Date createDate = null;
+		Date modifiedDate = null;
+		PersistentAccessorialCharge pCharge = null;
+		UserContext ctx = null;
+		UserData userData=null;
+
+		userData=UserData.getInstance();
+		ctx = UserContextDAOFactory.authenticate(userData.getAdminUserName(), userData.getAdminPassword());
+		factory=new AccessorialChargeDAOFactory();
+		dao=factory.getDAO();
+		charge=dao.create();
+		testCharge=new TestCaseAccessorialCharge1();
+		
+		charge.setAmount(testCharge.getAmount());
+		try {
+			charge.setDescription(testCharge.getDescription());
+		} catch (ChargeDescriptionTooLongException ex) {
+			ex.printStackTrace(System.err);
+		} // END try/catch
+		charge.setQuantity(testCharge.getQuantity());
+		
+		dao = new AccessorialChargeDAOFactory().getDAO();
+		pCharge =  dao.save(charge, ctx);
+		assert pCharge != null;
+		assert pCharge.getAmount() == testCharge.getAmount();
+		assert pCharge.getDescription().equals(testCharge.getDescription());
+		assert pCharge.getQuantity() == testCharge.getQuantity();
+		assert pCharge.getIdentifier() != null;
+		// Ensure the user who modified the object is the admin user
+		assert pCharge.getModifiedBy().compareTo(userData.getAdminUserName()) == 0;
+		// Validate dateCreated
+		createDate = pCharge.getDateCreated();
+		assert createDate != null;
+		/*
+		 * Ensure the value stored as the dateCreated is within 1000
+		 * milliseconds of the present.
+		 */
+		// assert new Date().getTime() - 1000 <= createDate.getTime();
+		// Validate dateModified
+		modifiedDate = pCharge.getDateModified();
+		assert modifiedDate != null;
+		// Ensure the modified date is equal to the createDate.
+		assert modifiedDate.getTime() == createDate.getTime();		
+	}
+
+	@Test(dependsOnMethods = { "testSave" })
+	public void testFindInstance() {
+		AccessorialCharge template = null;
+		PersistentAccessorialCharge foundCharge = null;
+		AccessorialChargeDAO dao = null;
+		UserContext ctx = null;
+		UserData userData=null;
+
+		userData=UserData.getInstance();
+		ctx = UserContextDAOFactory.authenticate(userData.getAdminUserName(), userData.getAdminPassword());
+		dao = new AccessorialChargeDAOFactory().getDAO();
+		template = new TestCaseAccessorialCharge1();
+		
+		foundCharge = dao.findInstance(template, ctx);
+		assert foundCharge != null;
+		assert foundCharge.getAmount().doubleValue() == template.getAmount().doubleValue();
+		assert foundCharge.getDescription().equals(template.getDescription());
+		assert foundCharge.getQuantity() == template.getQuantity();
+		assert ((PersistentAccessorialCharge) foundCharge).getQuoteIdentifier()
+				.equals(((PersistentAccessorialCharge) template).getQuoteIdentifier());		
+	}
 }

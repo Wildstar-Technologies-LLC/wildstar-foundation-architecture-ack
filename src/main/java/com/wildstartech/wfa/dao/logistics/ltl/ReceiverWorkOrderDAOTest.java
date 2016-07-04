@@ -52,6 +52,7 @@ import com.wildstartech.wfa.dao.UserData;
 import com.wildstartech.wfa.dao.UserContext;
 import com.wildstartech.wfa.dao.UserContextDAOFactory;
 import com.wildstartech.wfa.dao.WildDAOTest;
+import com.wildstartech.wfa.logistics.WarehouseLocation;
 import com.wildstartech.wfa.logistics.ltl.ReceiverWorkOrder;
 import com.wildstartech.wfa.logistics.ltl.ReceiverWorkOrderLineItem;
 
@@ -75,7 +76,7 @@ public class ReceiverWorkOrderDAOTest extends WildDAOTest {
          } // END if (result)
          // carrier
          if (result) {
-            result=isEqual(source.getCarrier(),target.getCarrier());
+            result=isEqual(source.getInboundCarrier(),target.getInboundCarrier());
          } // END if (result)
          // dateReceived
          if (result) {
@@ -132,55 +133,23 @@ public class ReceiverWorkOrderDAOTest extends WildDAOTest {
          ReceiverWorkOrderLineItem source,
          ReceiverWorkOrderLineItem target) {
       boolean result=true;
+      WarehouseLocation sourceLocation=null;
+      WarehouseLocation targetLocation=null;
+      
       if ((source != null) && (target != null)) {
-         // cube
-         if (result) {
-            result=(source.getCube() == target.getCube());
-         } // END if (result)
          // description
          if (result) {
             result=isEqual(source.getDescription(),target.getDescription());
-         } // END if (result)
-         // height
-         if (result) {
-            result=(source.getHeight() == target.getHeight());
-         } // END if (result)
-         // length
-         if (result) {
-            result=(source.getLength() == target.getLength());
          } // END if (result)
          // lineItemNumber
          if (result) {
             result=(source.getLineItemNumber() == target.getLineItemNumber());
          } // END if (result)
-         // packagingType
          if (result) {
-            result=isEqual(source.getPackagingType(),target.getPackagingType());
+            sourceLocation=source.getLocation();
+            targetLocation=target.getLocation();
          } // END if (result)
-         // productId
-         if (result) {
-            result=isEqual(source.getProductId(),target.getProductId());
-         } // END if (result)
-         // quantity
-         if (result) {
-            result=(source.getQuantity() == target.getQuantity());
-         } // END if (result)
-         // totalCube
-         if (result) {
-            result=(source.getTotalCube() == target.getTotalCube());
-         } // END if (result)
-         // totalWeight
-         if (result) {
-            result=(source.getTotalWeight() == target.getTotalWeight());
-         } // END if (result)
-         // weight
-         if (result) {
-            result=(source.getWeight() == target.getWeight());
-         } // END if (result)
-         // width
-         if (result) {
-            result=(source.getWidth() == target.getWidth());
-         } // END if (result)
+         
       } else {
          result=false;
       } // END if ((source != null) && (target != null))
@@ -218,12 +187,13 @@ public class ReceiverWorkOrderDAOTest extends WildDAOTest {
       ReceiverWorkOrderDAO dao=null;
       ReceiverWorkOrderDAOFactory factory=null;
       UserContext ctx=null;
+      UserData userData=null;
       
+      userData=UserData.getInstance();
+      ctx = UserContextDAOFactory.authenticate(userData.getAdminUserName(),
+          userData.getAdminPassword());
       factory=new ReceiverWorkOrderDAOFactory();
       dao=factory.getDAO();
-      ctx=UserContextDAOFactory.authenticate(
-            UserData.getAdminUserName(),
-            UserData.getAdminPassword());
       workOrder=new TestCaseReceiverWorkOrder1();
       pWorkOrder=dao.save(workOrder, ctx);
       assert pWorkOrder != null;
@@ -236,12 +206,13 @@ public class ReceiverWorkOrderDAOTest extends WildDAOTest {
       ReceiverWorkOrderDAO dao=null;
       ReceiverWorkOrderDAOFactory factory=null;
       UserContext ctx=null;
+      UserData userData=null;
       
+      userData=UserData.getInstance();
+      ctx = UserContextDAOFactory.authenticate(userData.getAdminUserName(),
+          userData.getAdminPassword());
       factory=new ReceiverWorkOrderDAOFactory();
       dao=factory.getDAO();
-      ctx=UserContextDAOFactory.authenticate(
-            UserData.getAdminUserName(),
-            UserData.getAdminPassword());
       workOrder=new TestCaseReceiverWorkOrder1();
       pWorkOrder=dao.save(workOrder, ctx);
       pWorkOrder.setTitle("Testing Modification.");
@@ -260,12 +231,13 @@ public class ReceiverWorkOrderDAOTest extends WildDAOTest {
       ReceiverWorkOrderLineItem item=null;
       ReceiverWorkOrderLineItem testItem=null;
       UserContext ctx=null;
+      UserData userData=null;
       
+      userData=UserData.getInstance();
+      ctx = UserContextDAOFactory.authenticate(userData.getAdminUserName(),
+          userData.getAdminPassword());
       factory=new ReceiverWorkOrderDAOFactory();
       dao=factory.getDAO();
-      ctx=UserContextDAOFactory.authenticate(
-            UserData.getAdminUserName(),
-            UserData.getAdminPassword());
       workOrder=new TestCaseReceiverWorkOrder1();
       pWorkOrder=dao.save(workOrder, ctx);
       pWorkOrder.setTitle("Testing Modification.");

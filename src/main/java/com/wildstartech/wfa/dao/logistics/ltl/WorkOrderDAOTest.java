@@ -125,9 +125,11 @@ public class WorkOrderDAOTest extends WildDAOTest {
         String id = null;
         String name = null;
         UserContext ctx = null;
-
-        ctx = UserContextDAOFactory.authenticate(UserData.getAdminUserName(),
-                UserData.getAdminPassword());
+        UserData userData=null;
+        
+        userData=UserData.getInstance();
+        ctx = UserContextDAOFactory.authenticate(userData.getAdminUserName(),
+            userData.getAdminPassword());
         assert ctx != null;
         // Let's prepare the data
         this.workOrder.setContactName(this.test1ContactName);
@@ -151,11 +153,11 @@ public class WorkOrderDAOTest extends WildDAOTest {
         name = this.workOrder.getCreatedBy();
         assert name != null;
         // Ensure the user who created the object is the admin user
-        assert name.compareTo(UserData.getAdminUserName()) == 0;
+        assert name.compareTo(userData.getAdminUserName()) == 0;
         name = this.workOrder.getModifiedBy();
         assert name != null;
         // Ensure the user who modified the object is the admin user
-        assert name.compareTo(UserData.getAdminUserName()) == 0;
+        assert name.compareTo(userData.getAdminUserName()) == 0;
         // Validate dateCreated
         createDate = this.workOrder.getDateCreated();
         assert createDate != null;
@@ -188,15 +190,14 @@ public class WorkOrderDAOTest extends WildDAOTest {
     public void testFindByIdentifier() {
         String workOrderId = null;
         UserContext ctx = null;
+        UserData userData=null;
         WorkOrderDAOFactory factory = null;
         WorkOrderDAO dao = null;
         WorkOrder workOrder = null;
-
-        // Log in.
-        ctx = UserContextDAOFactory.authenticate(
-                UserData.getAdminUserName(),
-                UserData.getAdminPassword()
-        );
+        
+        userData=UserData.getInstance();
+        ctx = UserContextDAOFactory.authenticate(userData.getAdminUserName(),
+            userData.getAdminPassword());
         workOrderId = this.workOrder.getIdentifier();
         factory = new WorkOrderDAOFactory();
         dao = factory.getDAO();
@@ -220,14 +221,13 @@ public class WorkOrderDAOTest extends WildDAOTest {
     public void testFindAll() {
         List<PersistentWorkOrder> workOrders = null;
         UserContext ctx = null;
+        UserData userData=null;
         WorkOrderDAOFactory factory = null;
         WorkOrderDAO dao = null;
-
-        // Log in.
-        ctx = UserContextDAOFactory.authenticate(
-                UserData.getAdminUserName(),
-                UserData.getAdminPassword()
-        );
+        
+        userData=UserData.getInstance();
+        ctx = UserContextDAOFactory.authenticate(userData.getAdminUserName(),
+            userData.getAdminPassword());
         factory = new WorkOrderDAOFactory();
         dao = factory.getDAO();
         workOrders = dao.findAll(ctx);
@@ -254,18 +254,17 @@ public class WorkOrderDAOTest extends WildDAOTest {
     public void testLineItemSave() {
         List<WorkOrderLineItem> lineItems = null;
         UserContext ctx = null;
+        UserData userData=null;
         WorkOrder workOrder = null;
         WorkOrderDAO wDAO = null;
         WorkOrderDAOFactory wDAOFactory = null;
         WorkOrderLineItemDAOFactory factory = null;
         WorkOrderLineItemDAO dao = null;
-        WorkOrderLineItem lineItem = null;
-
-        // Log in.
-        ctx = UserContextDAOFactory.authenticate(
-                UserData.getAdminUserName(),
-                UserData.getAdminPassword()
-        );
+        WorkOrderLineItem lineItem = null;        
+        
+        userData=UserData.getInstance();
+        ctx = UserContextDAOFactory.authenticate(userData.getAdminUserName(),
+            userData.getAdminPassword());
         // Get a reference to the WorkOrderDAO
         wDAOFactory = new WorkOrderDAOFactory();
         wDAO = wDAOFactory.getDAO();

@@ -44,85 +44,111 @@
  */
 package com.wildstartech.wfa.journal;
 
+import java.io.ByteArrayInputStream;
+import java.io.ByteArrayOutputStream;
 import java.io.InputStream;
 import java.io.OutputStream;
 import java.util.Date;
 
 import javax.activation.MimeType;
+import javax.activation.MimeTypeParseException;
 
+import com.wildstartech.wfa.MockObject;
 import com.wildstartech.wfa.journal.JournalEntry;
 
-public class MockJournalEntry implements JournalEntry {
+public class MockJournalEntry extends MockObject implements JournalEntry {
+	private Date entryDate=null;
+	private MimeType mimeType=null;
+	private String category = "";
+	private String content="";
+	private String description="";
+	
+	/**
+	 * Default, no-argument constructor.
+	 */
+	public MockJournalEntry() {
+		this.category="";
+		this.description="";
+		this.content="";
+		try {
+			this.mimeType=new MimeType("text","plain");
+		} catch (MimeTypeParseException ex) {
+			ex.printStackTrace(System.err);
+		} // END try/catch
+	}
+	
+	/**
+	 * 
+	 * @param entry
+	 */
+	public MockJournalEntry(JournalEntry entry) {
+		if (entry != null) {
+			this.entryDate=entry.getEntryDate();
+			this.category=entry.getCategory();
+			this.content=entry.getContent();
+			this.description=entry.getDescription();
+			this.mimeType=entry.getMimeType();
+		} // END if (entry != null)
+	}
 
-   private String caregory="";
-   
-   @Override
-   public String getCategory() {
-      return this.caregory;
-   }
+	@Override
+	public String getCategory() {
+		return this.category;
+	}
 
-   @Override
-   public void setCategory(String category) {
-      this.caregory=category;
-   }
+	@Override
+	public void setCategory(String category) {
+		this.category = category;
+	}
 
-   @Override
-   public InputStream getContentAsInputStream() {
-      return null;
-   }
+	@Override
+	public InputStream getContentAsInputStream() {
+		return new ByteArrayInputStream(this.content.getBytes());
+	}
 
-   @Override
-   public OutputStream getContentAsOutputStream() {
-      // TODO Auto-generated method stub
-      return null;
-   }
+	@Override
+	public OutputStream getContentAsOutputStream() {
+		ByteArrayOutputStream out=null;
+		return null;
+	}
 
-   @Override
-   public String getContent() {
-      // TODO Auto-generated method stub
-      return null;
-   }
+	@Override
+	public String getContent() {
+		return this.content;
+	}
 
-   @Override
-   public void setContent(String content) {
-      // TODO Auto-generated method stub
+	@Override
+	public void setContent(String content) {
+		this.content=content;
+	}
 
-   }
+	@Override
+	public String getDescription() {
+		return this.description;
+	}
 
-   @Override
-   public String getDescription() {
-      // TODO Auto-generated method stub
-      return null;
-   }
+	@Override
+	public void setDescription(String description) {
+		this.description=description;
+	}
 
-   @Override
-   public void setDescription(String description) {
-      // TODO Auto-generated method stub
+	@Override
+	public Date getEntryDate() {
+		return this.entryDate;
+	}
 
-   }
+	@Override
+	public void setEntryDate(Date entryDate) {
+		this.entryDate=entryDate;
+	}
 
-   @Override
-   public Date getEntryDate() {
-      // TODO Auto-generated method stub
-      return null;
-   }
+	@Override
+	public void setMimeType(MimeType mimeType) {
+		this.mimeType=mimeType;
+	}
 
-   @Override
-   public void setEntryDate(Date entryDate) {
-      // TODO Auto-generated method stub
-
-   }
-
-   @Override
-   public void setMimeType(MimeType mimeType) {
-      // TODO Auto-generated method stub
-
-   }
-
-   @Override
-   public MimeType getMimeType() {
-      // TODO Auto-generated method stub
-      return null;
-   }
-
+	@Override
+	public MimeType getMimeType() {
+		return this.mimeType;
+	}
 }

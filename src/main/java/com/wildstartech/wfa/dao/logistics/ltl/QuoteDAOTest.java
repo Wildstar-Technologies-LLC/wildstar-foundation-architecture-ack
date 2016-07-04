@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2013 - 2016 Wildstar Technologies, LLC.
+ * Copyright (c) 2001 - 2016 Wildstar Technologies, LLC.
  *
  * This file is part of Wildstar Foundation Architecture.
  *
@@ -47,12 +47,20 @@ package com.wildstartech.wfa.dao.logistics.ltl;
 import java.util.Date;
 import java.util.List;
 
+import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
 import com.wildstartech.wfa.dao.UserData;
 import com.wildstartech.wfa.dao.UserContext;
 import com.wildstartech.wfa.dao.UserContextDAOFactory;
 import com.wildstartech.wfa.dao.WildDAOTest;
+import com.wildstartech.wfa.dao.logistics.ltl.PersistentQuote;
+import com.wildstartech.wfa.dao.logistics.ltl.PersistentQuoteLineItem;
+import com.wildstartech.wfa.dao.logistics.ltl.QuoteDAO;
+import com.wildstartech.wfa.dao.logistics.ltl.QuoteDAOFactory;
+import com.wildstartech.wfa.dao.logistics.ltl.QuoteLineItemDAO;
+import com.wildstartech.wfa.dao.logistics.ltl.QuoteLineItemDAOFactory;
+import com.wildstartech.wfa.dao.logistics.ltl.TestCaseQuote1;
 import com.wildstartech.wfa.logistics.ltl.Quote;
 import com.wildstartech.wfa.logistics.ltl.QuoteLineItem;
 
@@ -70,46 +78,14 @@ import com.wildstartech.wfa.logistics.ltl.QuoteLineItem;
  * @version 0.1
  */
 public class QuoteDAOTest extends WildDAOTest {
-  PersistentQuote quote=null;
+  private PersistentQuote quote=null;
   // Quote Test Data
-  // Test1
-  private float test1Distance=327.63f;
-  private String test1ContactName="Derek Berube";
-  private String test1ContactPhone="404-444-5283";
-  private String test1ContactEmail="derek.berube@me.com";
-  private String test1OriginCity="Panama City Beach";
-  private String test1OriginState="FL";
-  private String test1OriginZip="32413";
-  private String test1DestinationCity="Suwanee";
-  private String test1DestinationState="GA";
-  private String test1DestinationZip="30024";
-  private String test1Notes="Some notes would go here.";  
- 
-  // Accessorial Test Data
-  // Test1
-  private float accessorial1Amount=100.52f; 
-  private int accessorial1Quantity=1;
-  private String accessorial1Description="First accessorial charge.";
-  // Test 2
-  private float accessorial2Amount=52.10f; 
-  private int accessorial2Quantity=5;
-  private String accessorial2Description="Second accessorial charge.";
+  private Quote testCase1;
   
-  // Quote Line Item Test Data
-  // Test 1
-  private int qli1Length=10;
-  private int qli1Width=20;
-  private int qli1Height=30;
-  private int qli1Weight=40;
-  private int qli1Quantity=10;
-  private String qli1Description="Test description for line item 1.";
-  //Test 2
-  private int qli2Length=15;
-  private int qli2Width=25;
-  private int qli2Height=35;
-  private int qli2Weight=45;
-  private int qli2Quantity=5;
-  private String qli2Description="Second line item.";
+  @BeforeClass
+  public void initializeTestCases() {
+	  this.testCase1=new TestCaseQuote1();
+  }
   
   /**
    * Tests the basic creation of an <code>Quote</code> object.
@@ -144,22 +120,24 @@ public class QuoteDAOTest extends WildDAOTest {
     String id=null;
     String name=null;
     UserContext ctx=null;
+    UserData userData=null;
     
-    ctx=UserContextDAOFactory.authenticate(UserData.getAdminUserName(),
-        UserData.getAdminPassword());
+    userData=UserData.getInstance();
+    ctx=UserContextDAOFactory.authenticate(userData.getAdminUserName(),
+        userData.getAdminPassword());
     assert ctx != null;
     // Let's prepare the data
-    this.quote.setContactName(this.test1ContactName);
-    this.quote.setContactPhone(this.test1ContactPhone);
-    this.quote.setContactEmail(this.test1ContactEmail);
-    this.quote.setOriginCity(this.test1OriginCity);
-    this.quote.setOriginState(this.test1OriginState);
-    this.quote.setOriginZip(this.test1OriginZip);
-    this.quote.setDestinationCity(this.test1DestinationCity);
-    this.quote.setDestinationState(this.test1DestinationState);
-    this.quote.setDestinationZip(this.test1DestinationZip);
-    this.quote.setDistance(this.test1Distance);
-    this.quote.setNotes(this.test1Notes);
+    this.quote.setContactName(this.testCase1.getContactName());
+    this.quote.setContactPhone(this.testCase1.getContactPhone());
+    this.quote.setContactEmail(this.testCase1.getContactEmail());
+    this.quote.setOriginCity(this.testCase1.getOriginCity());
+    this.quote.setOriginState(this.testCase1.getOriginState());
+    this.quote.setOriginZip(this.testCase1.getOriginZip());
+    this.quote.setDestinationCity(this.testCase1.getDestinationCity());
+    this.quote.setDestinationState(this.testCase1.getDestinationState());
+    this.quote.setDestinationZip(this.testCase1.getDestinationZip());
+    this.quote.setDistance(this.testCase1.getDistance());
+    this.quote.setNotes(this.testCase1.getNotes());
     // Let's get ready to save.
     factory=new QuoteDAOFactory();
     dao=factory.getDAO();    
@@ -170,11 +148,11 @@ public class QuoteDAOTest extends WildDAOTest {
     name=this.quote.getCreatedBy();
     assert name != null;
     // Ensure the user who created the object is the admin user
-    assert name.compareTo(UserData.getAdminUserName()) == 0;
+    assert name.compareTo(userData.getAdminUserName()) == 0;
     name=this.quote.getModifiedBy();
     assert name != null;
     // Ensure the user who modified the object is the admin user
-    assert name.compareTo(UserData.getAdminUserName()) == 0;
+    assert name.compareTo(userData.getAdminUserName()) == 0;
     // Validate dateCreated
     createDate=this.quote.getDateCreated();
     assert createDate != null;
@@ -187,20 +165,26 @@ public class QuoteDAOTest extends WildDAOTest {
     // Ensure the modified date is equal to the createDate.
     assert modifiedDate.getTime() == createDate.getTime();
     
-    assert this.quote.getContactName().compareTo(this.test1ContactName) == 0;
-    assert this.quote.getContactEmail().compareTo(this.test1ContactEmail) == 0;
-    assert this.quote.getContactPhone().compareTo(this.test1ContactPhone) == 0;
-    assert this.quote.getOriginCity().compareTo(this.test1OriginCity) == 0;
-    assert this.quote.getOriginState().compareTo(this.test1OriginState) == 0;
-    assert this.quote.getOriginZip().compareTo(this.test1OriginZip) == 0;
+    assert this.quote.getContactName().compareTo(
+    		this.testCase1.getContactName()) == 0;
+    assert this.quote.getContactEmail().compareTo(
+    		this.testCase1.getContactEmail()) == 0;
+    assert this.quote.getContactPhone().compareTo(
+    		this.testCase1.getContactPhone()) == 0;
+    assert this.quote.getOriginCity().compareTo(
+    		this.testCase1.getOriginCity()) == 0;
+    assert this.quote.getOriginState().compareTo(
+    		this.testCase1.getOriginState()) == 0;
+    assert this.quote.getOriginZip().compareTo(
+    		this.testCase1.getOriginZip()) == 0;
     assert this.quote.getDestinationCity().compareTo(
-        this.test1DestinationCity) == 0;
+        this.testCase1.getDestinationCity()) == 0;
     assert this.quote.getDestinationState().compareTo(
-        this.test1DestinationState) == 0;
+        this.testCase1.getDestinationState()) == 0;
     assert this.quote.getDestinationZip().compareTo(
-        this.test1DestinationZip) == 0;
-    assert this.quote.getDistance() == this.test1Distance;
-    assert this.quote.getNotes().compareTo(this.test1Notes) == 0;    
+        this.testCase1.getDestinationZip()) == 0;
+    assert this.quote.getDistance() == this.testCase1.getDistance();
+    assert this.quote.getNotes().compareTo(this.testCase1.getNotes()) == 0;    
   }
     
   @Test(dependsOnMethods = {"testSaveNoLineItems" }) 
@@ -209,26 +193,34 @@ public class QuoteDAOTest extends WildDAOTest {
     QuoteDAO dao=null;
     String id=null;
     UserContext ctx=null;
+    UserData userData=null;
     
-    ctx=UserContextDAOFactory.authenticate(UserData.getAdminUserName(),
-        UserData.getAdminPassword());
+    userData=UserData.getInstance();
+    ctx=UserContextDAOFactory.authenticate(userData.getAdminUserName(),
+        userData.getAdminPassword());
     dao=new QuoteDAOFactory().getDAO();
     id=this.quote.getIdentifier();
     quote=dao.findByIdentifier(id,ctx);
-    assert quote.getContactName().compareTo(this.test1ContactName) == 0;
-    assert quote.getContactEmail().compareTo(this.test1ContactEmail) == 0;
-    assert quote.getContactPhone().compareTo(this.test1ContactPhone) == 0;
-    assert quote.getOriginCity().compareTo(this.test1OriginCity) == 0;
-    assert quote.getOriginState().compareTo(this.test1OriginState) == 0;
-    assert quote.getOriginZip().compareTo(this.test1OriginZip) == 0;
+    assert quote.getContactName().compareTo(
+    		this.testCase1.getContactName()) == 0;
+    assert quote.getContactEmail().compareTo(
+    		this.testCase1.getContactEmail()) == 0;
+    assert quote.getContactPhone().compareTo(
+    		this.testCase1.getContactPhone()) == 0;
+    assert quote.getOriginCity().compareTo(
+    		this.testCase1.getOriginCity()) == 0;
+    assert quote.getOriginState().compareTo(
+    		this.testCase1.getOriginState()) == 0;
+    assert quote.getOriginZip().compareTo(
+    		this.testCase1.getOriginZip()) == 0;
     assert quote.getDestinationCity().compareTo(
-        this.test1DestinationCity) == 0;
+        this.testCase1.getDestinationCity()) == 0;
     assert quote.getDestinationState().compareTo(
-        this.test1DestinationState) == 0;
+        this.testCase1.getDestinationState()) == 0;
     assert quote.getDestinationZip().compareTo(
-        this.test1DestinationZip) == 0;
-    assert quote.getDistance() == this.test1Distance;
-    assert quote.getNotes().compareTo(this.test1Notes) == 0;   
+        this.testCase1.getDestinationZip()) == 0;
+    assert quote.getDistance() == this.testCase1.getDistance();
+    assert quote.getNotes().compareTo(this.testCase1.getNotes()) == 0;   
   }
   
   /**
@@ -240,10 +232,12 @@ public class QuoteDAOTest extends WildDAOTest {
     QuoteDAO dao=null;
     QuoteDAOFactory factory=null;
     UserContext ctx=null;
+    UserData userData=null;
     
+    userData=UserData.getInstance();
     // Log in.
-    ctx=UserContextDAOFactory.authenticate(UserData.getAdminUserName(),
-        UserData.getAdminPassword());
+    ctx=UserContextDAOFactory.authenticate(userData.getAdminUserName(),
+        userData.getAdminPassword());
     factory=new QuoteDAOFactory();
     dao=factory.getDAO();
     quotes=dao.findAll(ctx); 
@@ -255,24 +249,28 @@ public class QuoteDAOTest extends WildDAOTest {
   @Test(dependsOnMethods = {"testFindAllQuotes"})
   public void testQuoteLineItems() {
     QuoteLineItem item=null;
+    QuoteLineItem testItem=null;
     QuoteLineItemDAO dao=null;
     Date modifiedDate=null;
     QuoteDAO qDao=null;
     UserContext ctx=null;
-
-    ctx=UserContextDAOFactory.authenticate(UserData.getAdminUserName(),
-        UserData.getAdminPassword());
+    UserData userData=null;
+    
+    userData=UserData.getInstance();
+    testItem=this.testCase1.getLineItem(0);
+    ctx=UserContextDAOFactory.authenticate(userData.getAdminUserName(),
+        userData.getAdminPassword());
     dao=new QuoteLineItemDAOFactory().getDAO();
     qDao=new QuoteDAOFactory().getDAO();
     item=dao.create();
     // Populate the line item with data.
-    item.setDescription("Test Line Item");
-    item.setHeight(this.qli1Height);
-    item.setLength(this.qli1Length);
-    item.setWidth(this.qli1Width);
-    item.setWeight(this.qli1Weight);
-    item.setQuantity(this.qli1Quantity);
-    item.setDescription(this.qli1Description);
+    item.setDescription(testItem.getDescription());
+    item.setHeight(testItem.getHeight());
+    item.setLength(testItem.getLength());
+    item.setWidth(testItem.getWidth());
+    item.setWeight(testItem.getWeight());
+    item.setQuantity(testItem.getQuantity());
+    item.setDescription(testItem.getDescription());
     this.quote.addLineItem(item);
     this.quote=(PersistentQuote) qDao.save(this.quote,ctx);
 
@@ -287,11 +285,15 @@ public class QuoteDAOTest extends WildDAOTest {
     Quote quote=null;
     QuoteDAO dao=null;
     QuoteLineItem lineItem=null;
+    QuoteLineItem testItem=null;
     String quoteId=null;
     UserContext ctx=null;
+    UserData userData=null;
     
-    ctx=UserContextDAOFactory.authenticate(UserData.getAdminUserName(),
-        UserData.getAdminPassword());
+    userData=UserData.getInstance();
+    testItem=this.testCase1.getLineItem(0);
+    ctx=UserContextDAOFactory.authenticate(userData.getAdminUserName(),
+        userData.getAdminPassword());
     dao=new QuoteDAOFactory().getDAO();
     quoteId=this.quote.getIdentifier();
     quote=dao.findByIdentifier(quoteId,ctx);
@@ -301,33 +303,37 @@ public class QuoteDAOTest extends WildDAOTest {
     assert lineItems.size() == 1;
     lineItem=lineItems.get(0);
     assert lineItem != null;
-    assert lineItem.getLength() == this.qli1Length;
-    assert lineItem.getWidth() == this.qli1Width;
-    assert lineItem.getHeight() == this.qli1Height;
-    assert lineItem.getQuantity() == this.qli1Quantity;
-    assert lineItem.getDescription().equals(this.qli1Description);    
+    assert lineItem.getLength() == testItem.getLength();
+    assert lineItem.getWidth() == testItem.getWidth();
+    assert lineItem.getHeight() == testItem.getHeight();
+    assert lineItem.getQuantity() == testItem.getQuantity();
+    assert lineItem.getDescription().equals(testItem.getDescription());    
   }  
   
   @Test(dependsOnMethods={"testQuoteLineItems", "testQuoteLineItemSave"})
   public void testCorrectLineItems() {
     QuoteLineItem newQli=null;
+    QuoteLineItem testLineItem=null;
     QuoteLineItemDAO dao=null;
     List<QuoteLineItem> items=null;
     PersistentQuote quote=null;
     QuoteDAO qDao=null;
     UserContext ctx=null;
+    UserData userData=null;
     
-    ctx=UserContextDAOFactory.authenticate(UserData.getAdminUserName(),
-        UserData.getAdminPassword());
+    userData=UserData.getInstance();
+    testLineItem=this.testCase1.getLineItem(1);
+    ctx=UserContextDAOFactory.authenticate(userData.getAdminUserName(),
+        userData.getAdminPassword());
     dao=new QuoteLineItemDAOFactory().getDAO();
     qDao=new QuoteDAOFactory().getDAO();
     newQli=dao.create();
-    newQli.setLength(this.qli2Length);
-    newQli.setWidth(this.qli2Width);
-    newQli.setHeight(this.qli2Height);
-    newQli.setWeight(this.qli2Weight);
-    newQli.setQuantity(this.qli2Quantity);
-    newQli.setDescription(this.qli2Description);
+    newQli.setLength(testLineItem.getLength());
+    newQli.setWidth(testLineItem.getWidth());
+    newQli.setHeight(testLineItem.getHeight());
+    newQli.setWeight(testLineItem.getWeight());
+    newQli.setQuantity(testLineItem.getQuantity());
+    newQli.setDescription(testLineItem.getDescription());
     newQli=dao.save(newQli, ctx);
     newQli=dao.findByIdentifier(
         ((PersistentQuoteLineItem) newQli).getIdentifier(), 

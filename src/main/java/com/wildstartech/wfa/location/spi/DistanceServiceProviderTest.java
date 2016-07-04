@@ -46,13 +46,13 @@ package com.wildstartech.wfa.location.spi;
 
 import org.testng.annotations.Test;
 
-import com.wildstartech.wfa.location.GeoPoint;
+import com.wildstartech.wfa.location.MockGeoPoint;
 
 public class DistanceServiceProviderTest {
   @Test
   public void calculateDistanceGeoPointGeoPointTest() {
-    GeoPoint origin=null;
-    GeoPoint destination=null;
+    MockGeoPoint origin=null;
+    MockGeoPoint destination=null;
     
   }
 }

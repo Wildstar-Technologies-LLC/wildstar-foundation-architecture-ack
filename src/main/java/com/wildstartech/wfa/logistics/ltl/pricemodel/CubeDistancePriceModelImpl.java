@@ -46,7 +46,7 @@ package com.wildstartech.wfa.logistics.ltl.pricemodel;
 
 import java.util.logging.Logger;
 
-import com.wildstartech.wfa.logistics.ltl.Quote;
+import com.wildstartech.wfa.logistics.ltl.QuickQuote;
 import com.wildstartech.wfa.logistics.ltl.WorkOrder;
 import com.wildstartech.wfa.logistics.ltl.pricemodels.CubeDistancePriceModel;
 
@@ -254,7 +254,7 @@ implements CubeDistancePriceModel {
   }
 
   @Override
-  public double calculateTotalCharges(Quote quote) {
+  public double calculateTotalCharges(QuickQuote quote) {
     logger.entering(_CLASS,"calculateCharge(Quote)",quote);
     double charges=0;
     double distance=0;

@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+<suite guice-stage="DEVELOPMENT" name="Failed suite [Default suite]">
+  <test verbose="2" name="Default test">
+    <classes>
+      <class name="com.wildstartech.wfa.dao.logistics.ltl.QuoteDAOTest"/>
+    </classes>
+  </test> <!-- Default test -->
+  <test name="Default test(failed)">
+    <classes>
+      <class name="com.wildstartech.wfa.dao.logistics.ltl.QuoteDAOTest">
+        <methods>
+          <include name="testSaveNoLineItems"/>
+          <include name="testFindAllQuotes"/>
+          <include name="initializeTestCases"/>
+          <include name="testQuoteLineItems"/>
+          <include name="testQuoteLineItemSave"/>
+          <include name="testFindByIdentifier"/>
+          <include name="testCorrectLineItems"/>
+          <include name="testCreate"/>
+        </methods>
+      </class> <!-- com.wildstartech.wfa.dao.logistics.ltl.QuoteDAOTest -->
+    </classes>
+  </test> <!-- Default test(failed) -->
+</suite> <!-- Failed suite [Default suite] -->

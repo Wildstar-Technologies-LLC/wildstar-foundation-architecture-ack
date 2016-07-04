@@ -14,7 +14,8 @@ implements ReceiverWorkOrder {
    private JournalEntry newJournalEntry=null;
    private List<ReceiverWorkOrderLineItem> lineItems=null;
    private String billOfLadingNumber="";
-   private String carrier="";
+   private String depot="";
+   private String inboundCarrier="";
    private String purchaseOrderNumber="";
    private String salesOrderNumber="";
    
@@ -31,13 +32,13 @@ implements ReceiverWorkOrder {
 
    //***** carrier
    @Override
-   public String getCarrier() {
-      return this.carrier;
+   public String getInboundCarrier() {
+      return this.inboundCarrier;
    }
 
    @Override
-   public void setCarrier(String carrier) {
-      this.carrier=carrier;
+   public void setInboundCarrier(String inboundCarrier) {
+      this.inboundCarrier=inboundCarrier;
    }
    
    //***** dateReceived
@@ -51,6 +52,15 @@ implements ReceiverWorkOrder {
       this.dateReceived=dateReceived;
    }
  
+   // ***** depot
+   //@Override
+   public String getDepot() {
+      return this.depot;
+   }
+   //@Override
+   public void setDepot(String depot) {
+      this.depot=depot;      
+   }
    //***** lineItems
    @Override
    public List<ReceiverWorkOrderLineItem> getLineItems() {

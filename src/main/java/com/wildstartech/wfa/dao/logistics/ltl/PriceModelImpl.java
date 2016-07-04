@@ -46,7 +46,7 @@ package com.wildstartech.wfa.dao.logistics.ltl;
 
 import java.util.logging.Logger;
 
-import com.wildstartech.wfa.logistics.ltl.Quote;
+import com.wildstartech.wfa.logistics.ltl.QuickQuote;
 import com.wildstartech.wfa.logistics.ltl.pricemodels.PriceModel;
 
 public abstract class PriceModelImpl implements PriceModel {
@@ -88,5 +88,5 @@ public abstract class PriceModelImpl implements PriceModel {
   }
   
   @Override
-  public abstract double calculateTotalCharges(Quote quote);
+  public abstract double calculateTotalCharges(QuickQuote quote);
 }

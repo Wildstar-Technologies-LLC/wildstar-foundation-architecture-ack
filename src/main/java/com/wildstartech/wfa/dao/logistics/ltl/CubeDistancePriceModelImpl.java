@@ -46,8 +46,7 @@ package com.wildstartech.wfa.dao.logistics.ltl;
 
 import java.util.logging.Logger;
 
-import com.wildstartech.wfa.logistics.ltl.Quote;
-import com.wildstartech.wfa.logistics.ltl.QuoteLineItem;
+import com.wildstartech.wfa.logistics.ltl.QuickQuote;
 import com.wildstartech.wfa.logistics.ltl.WorkOrder;
 import com.wildstartech.wfa.logistics.ltl.WorkOrderLineItem;
 import com.wildstartech.wfa.logistics.ltl.pricemodels.CubeDistancePriceModel;
@@ -241,7 +240,7 @@ implements CubeDistancePriceModel {
   /**
    * Calculates the charge based upon the provided quote.
    */
-  public double calculateTotalCharges(Quote quote) {
+  public double calculateTotalCharges(QuickQuote quote) {
     logger.entering(_CLASS, "calculateCharge(Quote)",quote);
     double charge=0;
     double distance=0;
@@ -251,9 +250,7 @@ implements CubeDistancePriceModel {
       // Get the distance represented by the quote
       distance=quote.getDistance();
       // Add up the cubes per line item for the quote.
-      for(QuoteLineItem item: quote.getLineItems()) {
-        cubes=item.getTotalCube();
-      } // END for(QuoteLineItem item: quote.getLineItems())
+      cubes=quote.getTotalCubes();
       // Invoke the calculateCharge method to get the estimated charges.
       charge=calculateCharge(cubes,distance);
     } else {

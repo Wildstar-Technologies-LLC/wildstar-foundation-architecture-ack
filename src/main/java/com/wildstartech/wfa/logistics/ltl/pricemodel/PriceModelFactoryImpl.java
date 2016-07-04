@@ -48,7 +48,9 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Logger;
 
+import com.wildstartech.wfa.logistics.ltl.QuickQuote;
 import com.wildstartech.wfa.logistics.ltl.Quote;
+import com.wildstartech.wfa.logistics.ltl.SimpleQuote;
 import com.wildstartech.wfa.logistics.ltl.WorkOrder;
 import com.wildstartech.wfa.logistics.ltl.pricemodels.CubeDistancePriceModel;
 import com.wildstartech.wfa.logistics.ltl.pricemodels.PriceModel;
@@ -74,6 +76,22 @@ public class PriceModelFactoryImpl extends PriceModelFactory {
     logger.entering(_CLASS,"getDefaultModel()");
     PriceModel pm=new CubeDistancePriceModelImpl();
     logger.exiting(_CLASS,"getDefaultModel()",pm);
+    return pm;
+  }
+  
+  @Override
+  public PriceModel getModel(QuickQuote quote) {
+    logger.entering(_CLASS,"getModel(QuickQuote)",quote);
+    PriceModel pm=getDefaultModel();
+    logger.exiting(_CLASS,"getModel(QuickQuote)",pm);
+    return pm;
+  }
+  
+  @Override
+  public PriceModel getModel(SimpleQuote quote) {
+    logger.entering(_CLASS,"getModel(SimpleQuote)",quote);
+    PriceModel pm=getDefaultModel();
+    logger.exiting(_CLASS,"getModel(SimpleQuote)",pm);
     return pm;
   }
   

@@ -62,7 +62,7 @@ public class GeoPointTest {
     origin=factory.getCentroid("30024");
     destination=factory.getCentroid("32413");
     
-    distance=GeoPoint.calculateDistance(origin,destination);
+    distance=DistanceUtilities.calculateDistance(origin,destination);
     System.out.print("Origin: ");
     System.out.println(origin);
     System.out.print("Destination: ");
@@ -83,7 +83,7 @@ public class GeoPointTest {
     origin=factory.getCentroid("30024");
     destination=factory.getCentroid("32413");
     
-    distance=GeoPoint.calculateDistance(
+    distance=DistanceUtilities.calculateDistance(
         origin,
         destination);    
     System.out.print("Origin: ");
@@ -105,7 +105,7 @@ public class GeoPointTest {
     origin=factory.getCentroid("30024");
     destination=factory.getCentroid("32413");
     
-    distance=GeoPoint.calculateDistance(
+    distance=DistanceUtilities.calculateDistance(
         origin,
         destination);    
     System.out.print("Origin: ");
@@ -127,7 +127,7 @@ public class GeoPointTest {
     origin=factory.getCentroid("30024");
     destination=factory.getCentroid("32413");
     
-    distance=GeoPoint.calculateDistance(
+    distance=DistanceUtilities.calculateDistance(
         origin,
         destination);    
     System.out.print("Origin: ");

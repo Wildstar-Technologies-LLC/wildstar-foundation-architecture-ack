@@ -79,9 +79,11 @@ public class BasicTicketDAOTest extends WildDAOTest {
       TestCaseBasicTicket testCase=null;
       PersistentBasicTicket<?> pTicket=null;
       UserContext ctx=null;
+      UserData userData=null;
       
-      ctx=UserContextDAOFactory.authenticate(UserData.getAdminUserName(),
-            UserData.getAdminPassword());
+      userData=UserData.getInstance();
+      ctx=UserContextDAOFactory.authenticate(userData.getAdminUserName(),
+            userData.getAdminPassword());
       
       factory=new BasicTicketDAOFactory();
       assert factory != null;
@@ -99,13 +101,13 @@ public class BasicTicketDAOTest extends WildDAOTest {
       assert pTicket.getRequestId() != null;
       //** createdBy
       assert pTicket.getCreatedBy() != null;
-      assert pTicket.getCreatedBy().equals(UserData.getAdminUserName());
+      assert pTicket.getCreatedBy().equals(userData.getAdminUserName());
       //** dateCreated
       assert pTicket.getDateCreated() != null;
       assert pTicket.getDateModified().getTime() > new Date().getTime() - 1000;
       //** modifiedBy
       assert pTicket.getModifiedBy() != null;
-      assert pTicket.getModifiedBy().equals(UserData.getAdminUserName());
+      assert pTicket.getModifiedBy().equals(userData.getAdminUserName());
       //** dateModified
       assert pTicket.getDateModified() != null;
       assert pTicket.getDateModified().getTime() > new Date().getTime() - 1000;

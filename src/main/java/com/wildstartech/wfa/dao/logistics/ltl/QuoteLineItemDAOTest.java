@@ -87,9 +87,11 @@ public class QuoteLineItemDAOTest extends WildDAOTest {
     QuoteLineItemDAO dao = null;
     PersistentQuoteLineItem savedQli = null;
     UserContext ctx = null;
-
-    ctx = UserContextDAOFactory.authenticate(UserData.getAdminUserName(),
-        UserData.getAdminPassword());
+    UserData userData=null;
+    
+    userData=UserData.getInstance();
+    ctx = UserContextDAOFactory.authenticate(userData.getAdminUserName(),
+        userData.getAdminPassword());
     dao = new QuoteLineItemDAOFactory().getDAO();
     this.pQli.setDescription(this.test1Description);
     this.pQli.setLength(this.test1Length);
@@ -106,7 +108,7 @@ public class QuoteLineItemDAOTest extends WildDAOTest {
     assert savedQli.getQuoteIdentifier().equals(this.test1QuoteIdentifier);
 
     // Ensure the user who modified the object is the admin user
-    assert savedQli.getModifiedBy().compareTo(UserData.getAdminUserName()) == 0;
+    assert savedQli.getModifiedBy().compareTo(userData.getAdminUserName()) == 0;
     // Validate dateCreated
     createDate = savedQli.getDateCreated();
     assert createDate != null;
@@ -128,9 +130,11 @@ public class QuoteLineItemDAOTest extends WildDAOTest {
     PersistentQuoteLineItem found = null;
     String identifier = null;
     UserContext ctx = null;
-
-    ctx = UserContextDAOFactory.authenticate(UserData.getAdminUserName(),
-        UserData.getAdminPassword());
+    UserData userData=null;
+    
+    userData=UserData.getInstance();
+    ctx = UserContextDAOFactory.authenticate(userData.getAdminUserName(),
+        userData.getAdminPassword());
     dao = new QuoteLineItemDAOFactory().getDAO();
     identifier = this.pQli.getIdentifier();
     found = (PersistentQuoteLineItem) dao.findByIdentifier(identifier, ctx);
@@ -157,9 +161,11 @@ public class QuoteLineItemDAOTest extends WildDAOTest {
     List<PersistentQuoteLineItem> lineItems = null;
     String quoteIdentifier = null;
     UserContext ctx = null;
-
-    ctx = UserContextDAOFactory.authenticate(UserData.getAdminUserName(),
-        UserData.getAdminPassword());
+    UserData userData=null;
+    
+    userData=UserData.getInstance();
+    ctx = UserContextDAOFactory.authenticate(userData.getAdminUserName(),
+        userData.getAdminPassword());
     dao = new QuoteLineItemDAOFactory().getDAO();
     quoteIdentifier = this.pQli.getQuoteIdentifier();
     lineItems = dao.findByQuoteIdentifier(quoteIdentifier, ctx);
@@ -188,9 +194,11 @@ public class QuoteLineItemDAOTest extends WildDAOTest {
     QuoteLineItem template = null;
     QuoteLineItemDAO dao = null;
     UserContext ctx = null;
-
-    ctx = UserContextDAOFactory.authenticate(UserData.getAdminUserName(),
-        UserData.getAdminPassword());
+    UserData userData=null;
+    
+    userData=UserData.getInstance();
+    ctx = UserContextDAOFactory.authenticate(userData.getAdminUserName(),
+        userData.getAdminPassword());
     dao=new QuoteLineItemDAOFactory().getDAO();
     template=dao.create();
     ((PersistentQuoteLineItem) template).setQuoteIdentifier(

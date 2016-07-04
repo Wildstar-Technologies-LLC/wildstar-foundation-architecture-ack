@@ -48,81 +48,102 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Logger;
 
+import com.wildstartech.wfa.logistics.ltl.QuickQuote;
 import com.wildstartech.wfa.logistics.ltl.Quote;
+import com.wildstartech.wfa.logistics.ltl.SimpleQuote;
 import com.wildstartech.wfa.logistics.ltl.WorkOrder;
 import com.wildstartech.wfa.logistics.ltl.pricemodels.CubeDistancePriceModel;
 import com.wildstartech.wfa.logistics.ltl.pricemodels.PriceModel;
 import com.wildstartech.wfa.logistics.ltl.pricemodels.PriceModelFactory;
 
 public class PriceModelFactoryImpl extends PriceModelFactory {
-  private static final String _CLASS=PriceModelFactoryImpl.class.getName();
-  private static final Logger logger=Logger.getLogger(_CLASS);
-  
-  private final static List<String> labels=new ArrayList<String>();
-  static {
-    labels.add("Cube/Distance");
-    labels.add("Weight/Zone");
-  }
-  private final static List<String> types=new ArrayList<String>();
-  static {
-    types.add(CubeDistancePriceModel.TYPE);
-  }
-  @Override
-  public PriceModel getDefaultModel() {
-    logger.entering(_CLASS,"getDefaultModel()");
-    PriceModel pm=new CubeDistancePriceModelImpl();
-    logger.exiting(_CLASS,"getDefaultModel()",pm);
-    return pm;
-  }
-  
-  @Override
-  public PriceModel getModel(Quote quote) {
-    logger.entering(_CLASS,"getModel(Quote)",quote);
-    PriceModel pm=getDefaultModel();
-    logger.exiting(_CLASS,"getModel(Quote)",pm);
-    return pm;
-  }
-  
-  @Override
-  public PriceModel getModel(WorkOrder workOrder) {
-    logger.entering(_CLASS,"getModel(WorkOrder)",workOrder);
-    PriceModel pm=getDefaultModel();
-    logger.exiting(_CLASS,"getModel(WorkOrder)",pm);
-    return pm;
-  }
-  
-  @Override
-  public PriceModel getModelByLabel(String modelName) {
-    logger.entering(_CLASS,"getNamedModel(String)",modelName);
-    PriceModel pm=getDefaultModel();
-    logger.exiting(_CLASS,"getNamedModel(String)",pm);
-    return pm;
-  }
+	private static final String _CLASS = PriceModelFactoryImpl.class.getName();
+	private static final Logger logger = Logger.getLogger(_CLASS);
 
-  @Override
-  public PriceModel createType(String supportedType) {
-    logger.entering(_CLASS, "");
-    PriceModel pm=null;
-    if (supportedType != null) {
-      if (supportedType.equalsIgnoreCase(CubeDistancePriceModel.TYPE)) {
-        pm=new CubeDistancePriceModelImpl();
-      } // END if (supportedType.equalsIgnoreCase(CubeDistancePriceModel.TYPE))
-    } else {
-      logger.warning("The supportedType parameter is null.");
-    } // END if (supportedType != null)
-    logger.entering(_CLASS, "",pm);
-    return pm;
-  }
+	private final static List<String> labels = new ArrayList<String>();
+	static {
+		labels.add("Cube/Distance");
+		labels.add("Weight/Zone");
+	}
+	private final static List<String> types = new ArrayList<String>();
+	static {
+		types.add(CubeDistancePriceModel.TYPE);
+	}
 
-  @Override
-  public List<String> getModelLabels() {
-    // TODO Auto-generated method stub
-    return null;
-  }
-  @Override
-  public List<String> getModelTypes() {
-    logger.entering(_CLASS, "getModelTypes()");
-    logger.exiting(_CLASS, "getModelTypes()",PriceModelFactoryImpl.types);
-    return PriceModelFactoryImpl.types;
-  }  
+	@Override
+	public PriceModel getDefaultModel() {
+		logger.entering(_CLASS, "getDefaultModel()");
+		PriceModel pm = new CubeDistancePriceModelImpl();
+		logger.exiting(_CLASS, "getDefaultModel()", pm);
+		return pm;
+	}
+
+	@Override
+	public PriceModel getModel(QuickQuote quote) {
+		logger.entering(_CLASS, "getModel(QuickQuote)", quote);
+		PriceModel pm = getDefaultModel();
+		logger.exiting(_CLASS, "getModel(QuickQuote)", pm);
+		return pm;
+	}
+
+	@Override
+	public PriceModel getModel(SimpleQuote quote) {
+		logger.entering(_CLASS, "getModel(SimpleQuote)", quote);
+		PriceModel pm = getDefaultModel();
+		logger.exiting(_CLASS, "getModel(SimpleQuote)", pm);
+		return pm;
+	}
+
+	@Override
+	public PriceModel getModel(Quote quote) {
+		logger.entering(_CLASS, "getModel(Quote)", quote);
+		PriceModel pm = getDefaultModel();
+		logger.exiting(_CLASS, "getModel(Quote)", pm);
+		return pm;
+	}
+
+	@Override
+	public PriceModel getModel(WorkOrder workOrder) {
+		logger.entering(_CLASS, "getModel(WorkOrder)", workOrder);
+		PriceModel pm = getDefaultModel();
+		logger.exiting(_CLASS, "getModel(WorkOrder)", pm);
+		return pm;
+	}
+
+	@Override
+	public PriceModel getModelByLabel(String modelName) {
+		logger.entering(_CLASS, "getNamedModel(String)", modelName);
+		PriceModel pm = getDefaultModel();
+		logger.exiting(_CLASS, "getNamedModel(String)", pm);
+		return pm;
+	}
+
+	@Override
+	public PriceModel createType(String supportedType) {
+		logger.entering(_CLASS, "");
+		PriceModel pm = null;
+		if (supportedType != null) {
+			if (supportedType.equalsIgnoreCase(CubeDistancePriceModel.TYPE)) {
+				pm = new CubeDistancePriceModelImpl();
+			} // END if
+				// (supportedType.equalsIgnoreCase(CubeDistancePriceModel.TYPE))
+		} else {
+			logger.warning("The supportedType parameter is null.");
+		} // END if (supportedType != null)
+		logger.entering(_CLASS, "", pm);
+		return pm;
+	}
+
+	@Override
+	public List<String> getModelLabels() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public List<String> getModelTypes() {
+		logger.entering(_CLASS, "getModelTypes()");
+		logger.exiting(_CLASS, "getModelTypes()", PriceModelFactoryImpl.types);
+		return PriceModelFactoryImpl.types;
+	}
 }

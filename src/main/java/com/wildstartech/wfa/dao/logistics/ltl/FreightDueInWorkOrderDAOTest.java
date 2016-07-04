@@ -82,9 +82,11 @@ extends WildDAOTest {
       PersistentFreightDueInWorkOrder pWorkOrder=null;
       String testString="";
       UserContext ctx=null;
+      UserData userData=null;
       
-      ctx=UserContextDAOFactory.authenticate(UserData.getAdminUserName(),
-          UserData.getAdminPassword());
+      userData=UserData.getInstance();
+      ctx=UserContextDAOFactory.authenticate(userData.getAdminUserName(),
+          userData.getAdminPassword());
       assert ctx != null;
       factory=new FreightDueInWorkOrderDAOFactory();
       assert factory != null;
@@ -218,16 +220,17 @@ extends WildDAOTest {
       TestCaseFreightDueInWorkOrder2 testCase2=null;
       List<PersistentFreightDueInWorkOrder> workOrders=null;
       PersistentFreightDueInWorkOrder pWorkOrder=null;
-      String tmpStr=null;
       String workOrderIdentifier=null;
       UserContext ctx=null;
+      UserData userData=null;
       
+      userData=UserData.getInstance();
       factory=new FreightDueInWorkOrderDAOFactory();
       assert factory != null;
       dao=factory.getDAO();
       assert dao != null;
-      ctx=UserContextDAOFactory.authenticate(UserData.getAdminUserName(),
-            UserData.getAdminPassword());
+      ctx=UserContextDAOFactory.authenticate(userData.getAdminUserName(),
+            userData.getAdminPassword());
       pWorkOrder=dao.save(pWorkOrder, ctx);
       testCase2=new TestCaseFreightDueInWorkOrder2();
       pWorkOrder=this.workOrders.get("TESTCASE1");
@@ -244,7 +247,6 @@ extends WildDAOTest {
       // Let's count the work orders
       workOrders=dao.findAll(ctx);
       tmpInt=workOrders.size();
-      assert tmpInt == 1;
-      
+      assert tmpInt == 1;      
    }
 }

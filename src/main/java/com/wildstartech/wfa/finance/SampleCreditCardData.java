@@ -1,3 +1,47 @@
+/*
+ * Copyright (c) 2001 - 2016 Wildstar Technologies, LLC.
+ *
+ * This file is part of the Wildstar Foundation Architecture ACK.
+ *
+ * Wildstar Foundation Architecture Application Compatibility Kit (WFA-ACK) 
+ * is free software: you can redistribute it and/or modify it under the 
+ * terms of the GNU General Public License as published by the Free  
+ * Software Foundation, either version 3 of the License, or (at your  
+ * option) any later version.
+ *
+ * WFA-ACK is distributed in the hope that it will be useful, but WITHOUT 
+ * ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or 
+ * FITNESS FOR A PARTICULAR PURPOSE.  See the GNU General Public License 
+ * for more details.
+ *
+ * You should have received a copy of the GNU General Public License along with
+ * WFA-ACK.  If not, see  <http://www.gnu.org/licenses/>.
+ * 
+ * Linking this library statically or dynamically with other modules is making a
+ * combined work based on this library. Thus, the terms and conditions of the 
+ * GNU General Public License cover the whole combination.
+ * 
+ * As a special exception, the copyright holders of this library give you 
+ * permission to link this library with independent modules to produce an 
+ * executable, regardless of the license terms of these independent modules, 
+ * and to copy and distribute the resulting executable under terms of your 
+ * choice, provided that you also meet, for each linked independent module, the
+ * terms and conditions of the license of that module. An independent module is
+ * a module which is not derived from or based on this library. If you modify 
+ * this library, you may extend this exception to your version of the library, 
+ * but you are not obliged to do so. If you do not wish to do so, delete this 
+ * exception statement from your version.
+ * 
+ * If you need additional information or have any questions, please contact:
+ *
+ *      Wildstar Technologies, LLC.
+ *      63 The Greenway Loop
+ *      Inlet Beach, FL 32461
+ *      USA
+ *
+ *      derek.berube@wildstartech.com
+ *      www.wildstartech.com
+ */
 package com.wildstartech.wfa.finance;
 
 import java.util.Calendar;
@@ -22,195 +66,49 @@ public class SampleCreditCardData {
 
     // American Express
     public static CreditCard[] amex = {
-        new MockCreditCard(
-        "American Express (0005)",
-        "378282246310005",
-        "American Express",
-        "Johnny Appleseed",
-        "ACME Bank",
-        "1111",
-        SampleCreditCardData.expirationMonth,
-        SampleCreditCardData.expirationYear),
-        new MockCreditCard(
-        "American Express (8431)",
-        "371449635398431",
-        "American Express",
-        "Johnny Appleseed",
-        "American Express Bank",
-        "1212",
-        SampleCreditCardData.expirationMonth,
-        SampleCreditCardData.expirationYear),
-        new MockCreditCard(
-        "American Express Corporate (1000)",
-        "378734493671000",
-        "American Express",
-        "Johnny Appleseed",
-        "American Express Bank",
-        "1313",
-        SampleCreditCardData.expirationMonth,
-        SampleCreditCardData.expirationYear)
+        new TestCaseAmex0005(),
+        new TestCaseAmex8431(),
+        new TestCaseAmex1000(),
     };
     
     // Australian Bank Card
     public static CreditCard[] austrailianBankCard = {
-        new MockCreditCard(
-        "Australian Bank Card (8250)",
-        "5610591081018250",
-        "Australian Bank Card",
-        "Johnny Appleseed",
-        "ACME Bank",
-        "2121" ,
-        SampleCreditCardData.expirationMonth,
-        SampleCreditCardData.expirationYear)
+          new TestCaseAustralianBankCard8250()
     };
     
     // Diners Club
     public static CreditCard[] dinersClub = {
-        new MockCreditCard(
-        "Diner's Club (5904)",
-        "30569309025904",
-        "Diner's Club",
-        "Johnny Appleseed",
-        "ACME Bank",
-        "3131",
-        SampleCreditCardData.expirationMonth,
-        SampleCreditCardData.expirationYear),
-        new MockCreditCard(
-        "Diner's Club (3237)",
-        "38520000023237",
-        "Diner's Club",
-        "Johnny Appleseed",
-        "ACME Bank",
-        "3232",
-        SampleCreditCardData.expirationMonth,
-        SampleCreditCardData.expirationYear)
+          new TestCaseDinersClub5904(),
+          new TestCaseDinersClub3237()
     };
     
     // Discover
     public static CreditCard[] discover = {
-        new MockCreditCard(
-        "Discover (1117)",
-        "6011111111111117",
-        "Discover",
-        "Johnny Appleseed",
-        "ACME Bank",
-        "4141",
-        SampleCreditCardData.expirationMonth,
-        SampleCreditCardData.expirationYear),
-        new MockCreditCard(
-        "Discover (9424)",
-        "6011000990139424",
-        "Discover",
-        "Johnny Appleseed",
-        "ACME Bank",
-        "4242",
-        SampleCreditCardData.expirationMonth,
-        SampleCreditCardData.expirationYear)
+        new TestCaseDiscover1117(),
+        new TestCaseDiscover9424()
     };
 
     // JCB
     public static CreditCard[] jcb = {
-        new MockCreditCard(
-        "JCB (0000)",
-        "3530111333300000",
-        "JCB",
-        "Johnny Appleseed",
-        "ACME Bank",
-        "5151",
-        SampleCreditCardData.expirationMonth,
-        SampleCreditCardData.expirationYear),
-        new MockCreditCard(
-        "JCB (0505)",
-        "3566002020360505",
-        "JCB",
-        "Johnny Appleseed",
-        "ACME Bank",
-        "5252",
-        SampleCreditCardData.expirationMonth,
-        SampleCreditCardData.expirationYear)
+        new TestCaseJCB0000(),
+        new TestCaseJCB0505()
     };
     // MasterCard
     public static CreditCard[] masterCard = {
-        new MockCreditCard(
-        "MasterCard (4444)",
-        "5555555555554444",
-        "MasterCard",
-        "Johnny Appleseed",
-        "ACME Bank",
-        "6161",
-        SampleCreditCardData.expirationMonth,
-        SampleCreditCardData.expirationYear),
-        new MockCreditCard(
-        "MasterCard (5100)",
-        "5105105105105100",
-        "MasterCard",
-        "Johnny Appleseed",
-        "ACME Bank",
-        "6262",
-        SampleCreditCardData.expirationMonth,
-        SampleCreditCardData.expirationYear)
+        new TestCaseMasterCard4444(),
+        new TestCaseMasterCard5100()
     };
     // Visa
     public static CreditCard[] visa = {
-        new MockCreditCard(
-        "Visa (1111)",
-        "4111111111111111",
-        "Visa",
-        "Johnny Appleseed",
-        "ACME Bank",
-        "7171",
-        SampleCreditCardData.expirationMonth,
-        SampleCreditCardData.expirationYear),
-        new MockCreditCard(
-        "Visa (1881)",
-        "4012888888881881",
-        "Visa",
-        "Johnny Appleseed",
-        "ACME Bank",
-        "7272",
-        SampleCreditCardData.expirationMonth,
-        SampleCreditCardData.expirationYear),
-        new MockCreditCard(
-        "Visa (2222)",
-        "4222222222222",
-        "Visa",
-        "Johnny Appleseed",
-        "ACME Bank",
-        "7373",
-        SampleCreditCardData.expirationMonth,
-        SampleCreditCardData.expirationYear)
+        new TestCaseVisa1111(),
+        new TestCaseVisa1881(),
+        new TestCaseVisa2222()
     };
     // Dankort (PBS)
     public static CreditCard[] dankort = {
-        new MockCreditCard(
-        "Dankort (4561)",
-        "76009244561",
-        "Dankort",
-        "Johnny Appleseed",
-        "ACME Bank",
-        "8181",
-        SampleCreditCardData.expirationMonth,
-        SampleCreditCardData.expirationYear),
-        new MockCreditCard(
-        "Dankort (3742)",
-        "5019717010103742",
-        "Dankort",
-        "Johnny Appleseed",
-        "ACME Bank",
-        "8282",
-        SampleCreditCardData.expirationMonth,
-        SampleCreditCardData.expirationYear)
+        new TestCaseDankort4561(),
+        new TestCaseDankort3742()        
     };
     // Switch/Solo (Paymentech)
-    public static CreditCard[] switchSolo = {
-        new MockCreditCard(
-        "Switch/Solo (0016)",
-        "6331101999990016",
-        "Visa",
-        "Johnny Appleseed",
-        "ACME Bank",
-        "9191",
-        SampleCreditCardData.expirationMonth,
-        SampleCreditCardData.expirationYear)
-    };
+    public static CreditCard[] switchSolo = { new TestCaseSwitchSolo0016() };
 }

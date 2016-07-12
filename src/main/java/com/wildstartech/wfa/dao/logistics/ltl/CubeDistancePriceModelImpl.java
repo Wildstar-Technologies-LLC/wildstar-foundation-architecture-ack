@@ -1,21 +1,21 @@
 /*
- * Copyright (c) 2013 - 2016 Wildstar Technologies, LLC.
+ * Copyright (c) 2001 - 2016 Wildstar Technologies, LLC.
  *
- * This file is part of Wildstar Foundation Architecture.
+ * This file is part of the Wildstar Foundation Architecture ACK.
  *
- * Wildstar Foundation Architecture is free software: you can redistribute it
- * and/or modify it under the terms of the GNU General Public License as
- * published by the Free Software Foundation, either version 3 of the License,
- * or (at your option) any later version.
+ * Wildstar Foundation Architecture Application Compatibility Kit (WFA-ACK) 
+ * is free software: you can redistribute it and/or modify it under the 
+ * terms of the GNU General Public License as published by the Free  
+ * Software Foundation, either version 3 of the License, or (at your  
+ * option) any later version.
  *
- * Wildstar Foundation Architecture is distributed in the hope that it will be
- * useful, but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- * GNU General Public License for more details.
+ * WFA-ACK is distributed in the hope that it will be useful, but WITHOUT 
+ * ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or 
+ * FITNESS FOR A PARTICULAR PURPOSE.  See the GNU General Public License 
+ * for more details.
  *
  * You should have received a copy of the GNU General Public License along with
- * Wildstar Foundation Architecture.  If not, see 
- * <http://www.gnu.org/licenses/>.
+ * WFA-ACK.  If not, see  <http://www.gnu.org/licenses/>.
  * 
  * Linking this library statically or dynamically with other modules is making a
  * combined work based on this library. Thus, the terms and conditions of the 
@@ -36,7 +36,7 @@
  *
  *      Wildstar Technologies, LLC.
  *      63 The Greenway Loop
- *      Panama City Beach, FL 32413
+ *      Inlet Beach, FL 32461
  *      USA
  *
  *      derek.berube@wildstartech.com
@@ -47,6 +47,8 @@ package com.wildstartech.wfa.dao.logistics.ltl;
 import java.util.logging.Logger;
 
 import com.wildstartech.wfa.logistics.ltl.QuickQuote;
+import com.wildstartech.wfa.logistics.ltl.Quote;
+import com.wildstartech.wfa.logistics.ltl.SimpleQuote;
 import com.wildstartech.wfa.logistics.ltl.WorkOrder;
 import com.wildstartech.wfa.logistics.ltl.WorkOrderLineItem;
 import com.wildstartech.wfa.logistics.ltl.pricemodels.CubeDistancePriceModel;
@@ -258,6 +260,24 @@ implements CubeDistancePriceModel {
     } // END if (quote != null)
     logger.exiting(_CLASS,"calculateCharge(Quote)",charge);
     return charge;
+  }
+  
+  @Override 
+  public double calculateTotalCharges(SimpleQuote quote) {
+	  logger.entering(_CLASS, "calculateTotalCharges(SimpleQuote)",quote);
+	  double charges=0;
+	  charges=calculateTotalCharges((QuickQuote) quote);
+	  logger.exiting(_CLASS, "calculateTotalCharges(SimpleQuote)",charges);
+	  return charges;
+  }
+  
+  @Override
+  public double calculateTotalCharges(Quote quote) {
+	  logger.entering(_CLASS, "calculateTotalCharges(Quote)",quote);
+	  double charges=0;
+	  charges=calculateTotalCharges((QuickQuote) quote);
+	  logger.exiting(_CLASS, "calculateTotalCharges(Quote)",charges);
+	  return charges;
   }
   /**
    * Calculates the charge based upon the provided quote.

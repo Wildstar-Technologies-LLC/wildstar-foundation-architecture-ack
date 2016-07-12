@@ -1,21 +1,21 @@
 /*
- * Copyright (c) 2013 - 2016 Wildstar Technologies, LLC.
+ * Copyright (c) 2001 - 2016 Wildstar Technologies, LLC.
  *
- * This file is part of Wildstar Foundation Architecture.
+ * This file is part of the Wildstar Foundation Architecture ACK.
  *
- * Wildstar Foundation Architecture is free software: you can redistribute it
- * and/or modify it under the terms of the GNU General Public License as
- * published by the Free Software Foundation, either version 3 of the License,
- * or (at your option) any later version.
+ * Wildstar Foundation Architecture Application Compatibility Kit (WFA-ACK) 
+ * is free software: you can redistribute it and/or modify it under the 
+ * terms of the GNU General Public License as published by the Free  
+ * Software Foundation, either version 3 of the License, or (at your  
+ * option) any later version.
  *
- * Wildstar Foundation Architecture is distributed in the hope that it will be
- * useful, but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- * GNU General Public License for more details.
+ * WFA-ACK is distributed in the hope that it will be useful, but WITHOUT 
+ * ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or 
+ * FITNESS FOR A PARTICULAR PURPOSE.  See the GNU General Public License 
+ * for more details.
  *
  * You should have received a copy of the GNU General Public License along with
- * Wildstar Foundation Architecture.  If not, see 
- * <http://www.gnu.org/licenses/>.
+ * WFA-ACK.  If not, see  <http://www.gnu.org/licenses/>.
  * 
  * Linking this library statically or dynamically with other modules is making a
  * combined work based on this library. Thus, the terms and conditions of the 
@@ -36,7 +36,7 @@
  *
  *      Wildstar Technologies, LLC.
  *      63 The Greenway Loop
- *      Panama City Beach, FL 32413
+ *      Inlet Beach, FL 32461
  *      USA
  *
  *      derek.berube@wildstartech.com
@@ -44,36 +44,5 @@
  */
 package com.wildstartech.wfa.dao;
 
-import java.util.Date;
-
-import org.testng.annotations.Test;
-
-@Test
-public class WildDAOTest {
-  
-  public boolean isEqual(String source, String target) {
-     boolean result=false;
-     
-     if (
-           (source != null) && 
-           (target != null) &&
-           source.equals(target)) {
-        result=true;        
-     }
-     return result;
-  }
-  public boolean isEqual(Date source, Date target) {
-     boolean result=false;
-     long sourceTime=0;
-     long targetTime=0;
-     
-     if ((source != null) && (target != null)) {
-        sourceTime=source.getTime();
-        targetTime=target.getTime();
-        if (sourceTime == targetTime) {
-           result=true;
-        } // END if (sourceTime == targetTime)
-     } // END if ((source != null) && (target != null))
-     return result;
-  }
+public class WildDAOTest extends TestCaseBase {
 }

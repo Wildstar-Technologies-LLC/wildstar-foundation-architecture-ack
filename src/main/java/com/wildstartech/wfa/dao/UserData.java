@@ -1,21 +1,21 @@
 /*
- * Copyright (c) 2013 - 2016 Wildstar Technologies, LLC.
+ * Copyright (c) 2001 - 2016 Wildstar Technologies, LLC.
  *
- * This file is part of Wildstar Foundation Architecture.
+ * This file is part of the Wildstar Foundation Architecture ACK.
  *
- * Wildstar Foundation Architecture is free software: you can redistribute it
- * and/or modify it under the terms of the GNU General Public License as
- * published by the Free Software Foundation, either version 3 of the License,
- * or (at your option) any later version.
+ * Wildstar Foundation Architecture Application Compatibility Kit (WFA-ACK) 
+ * is free software: you can redistribute it and/or modify it under the 
+ * terms of the GNU General Public License as published by the Free  
+ * Software Foundation, either version 3 of the License, or (at your  
+ * option) any later version.
  *
- * Wildstar Foundation Architecture is distributed in the hope that it will be
- * useful, but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- * GNU General Public License for more details.
+ * WFA-ACK is distributed in the hope that it will be useful, but WITHOUT 
+ * ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or 
+ * FITNESS FOR A PARTICULAR PURPOSE.  See the GNU General Public License 
+ * for more details.
  *
  * You should have received a copy of the GNU General Public License along with
- * Wildstar Foundation Architecture.  If not, see 
- * <http://www.gnu.org/licenses/>.
+ * WFA-ACK.  If not, see  <http://www.gnu.org/licenses/>.
  * 
  * Linking this library statically or dynamically with other modules is making a
  * combined work based on this library. Thus, the terms and conditions of the 
@@ -36,7 +36,7 @@
  *
  *      Wildstar Technologies, LLC.
  *      63 The Greenway Loop
- *      Panama City Beach, FL 32413
+ *      Inlet Beach, FL 32461
  *      USA
  *
  *      derek.berube@wildstartech.com
@@ -48,6 +48,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.util.Map;
 import java.util.Properties;
+import java.util.Set;
 import java.util.StringTokenizer;
 import java.util.TreeMap;
 import java.util.logging.Level;
@@ -102,6 +103,7 @@ public class UserData {
 				credentials.setPassword(
 						props.getProperty(
 								UserContextDAO.PROPKEY_ADMIN_PASSWORD));
+				this.adminCredentials=credentials;
 			} catch (IOException ex) {
 				ex.printStackTrace();
 			} // END try/catch
@@ -168,8 +170,8 @@ public class UserData {
 	public String getAdminUserName() {
 		logger.entering(_CLASS, "getAdminUserName()");
 		logger.exiting(_CLASS, "getAdminUserName()", 
-				UserData.data.adminCredentials.getUserName());
-		return UserData.data.adminCredentials.getUserName();
+				this.adminCredentials.getUserName());
+		return this.adminCredentials.getUserName();
 	}
 
 	/**
@@ -181,8 +183,8 @@ public class UserData {
 	public String getAdminPassword() {
 		logger.entering(_CLASS, "getAdminPassword()");
 		logger.exiting(_CLASS, "getAdminPassword()", 
-				UserData.data.adminCredentials.getPassword());
-		return UserData.data.adminCredentials.getPassword();
+				this.adminCredentials.getPassword());
+		return this.adminCredentials.getPassword();
 	}
 
 	/**
@@ -193,7 +195,7 @@ public class UserData {
 		Credentials credentials=null;
 		String userName=null;
 		
-		credentials=UserData.data.users.get(userKey);
+		credentials=this.users.get(userKey);
 		if (credentials != null) {
 			userName=credentials.getUserName();
 		} else {
@@ -213,7 +215,7 @@ public class UserData {
 		Credentials credentials=null;
 		String password="";
 		
-		credentials=UserData.data.users.get(userKey);
+		credentials=this.users.get(userKey);
 		if (credentials != null) {
 			password=credentials.getPassword();
 		} else {
@@ -222,5 +224,15 @@ public class UserData {
 		
 		logger.exiting(_CLASS, "getUserPassword(String)",password);
 		return password;
-	}	
+	}
+	/**
+	 * Returns a list of defined users.
+	 */
+	public Set<String> getUserNames() {
+		logger.entering(_CLASS, "getUserNames()");
+		Set<String> userNames=null;
+		userNames=this.users.keySet();
+		logger.exiting(_CLASS, "getUserNames()",userNames);
+		return userNames;
+	}
 }

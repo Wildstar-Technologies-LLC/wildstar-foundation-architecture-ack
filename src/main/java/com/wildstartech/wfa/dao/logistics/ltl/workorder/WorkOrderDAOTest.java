@@ -42,7 +42,7 @@
  *      derek.berube@wildstartech.com
  *      www.wildstartech.com
  */
-package com.wildstartech.wfa.dao.logistics.ltl;
+package com.wildstartech.wfa.dao.logistics.ltl.workorder;
 
 import java.util.Date;
 import java.util.List;
@@ -53,6 +53,12 @@ import com.wildstartech.wfa.dao.UserData;
 import com.wildstartech.wfa.dao.UserContext;
 import com.wildstartech.wfa.dao.UserContextDAOFactory;
 import com.wildstartech.wfa.dao.WildDAOTest;
+import com.wildstartech.wfa.dao.logistics.ltl.PersistentWorkOrder;
+import com.wildstartech.wfa.dao.logistics.ltl.PersistentWorkOrderLineItem;
+import com.wildstartech.wfa.dao.logistics.ltl.WorkOrderDAO;
+import com.wildstartech.wfa.dao.logistics.ltl.WorkOrderDAOFactory;
+import com.wildstartech.wfa.dao.logistics.ltl.WorkOrderLineItemDAO;
+import com.wildstartech.wfa.dao.logistics.ltl.WorkOrderLineItemDAOFactory;
 import com.wildstartech.wfa.logistics.ltl.WorkOrder;
 import com.wildstartech.wfa.logistics.ltl.WorkOrderLineItem;
 

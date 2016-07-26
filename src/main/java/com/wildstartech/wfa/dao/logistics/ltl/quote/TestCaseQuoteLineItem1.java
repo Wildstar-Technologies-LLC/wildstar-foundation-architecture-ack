@@ -42,42 +42,18 @@
  *      derek.berube@wildstartech.com
  *      www.wildstartech.com
  */
-package com.wildstartech.wfa.dao.logistics.ltl;
+package com.wildstartech.wfa.dao.logistics.ltl.quote;
 
-import java.util.Date;
+import com.wildstartech.wfa.logistics.ltl.MockQuoteLineItem;
 
-import com.wildstartech.wfa.logistics.ltl.MockReceiverWorkOrderLineItem;
-import com.wildstartech.wfa.logistics.ltl.ReceiverWorkOrderLineItem;
-
-public class TestCaseReceiverWorkOrder1 extends TestCaseReceiverWorkOrderBase {
-   public Date dateReceived=new Date();
-   
-   public TestCaseReceiverWorkOrder1() {
-      ReceiverWorkOrderLineItem lineItem=null;
-      
-      this.setBillOfLadingNumber("BOL1234");
-      this.setInboundCarrier("ACME Furniture Purveyors");
-      this.setDateReceived(this.dateReceived);
-      this.setPurchaseOrderNumber("PO#4321");
-      this.setSalesOrderNumber("SO97531");
-      this.setShortDescription("Short Description");
-      this.setStatusState("New");
-      this.setStatusReason("");
-      this.setTitle("Receiver Work Order Test Case");
-      
-      //***** First LineItem
-      lineItem=new MockReceiverWorkOrderLineItem();
-      lineItem.setDescription("FIRST LINE ITEM");
-      addLineItem(lineItem);
-      
-      //***** Second LineItem
-      lineItem=new MockReceiverWorkOrderLineItem();
-      lineItem.setDescription("SECOND LINE ITEM");
-      addLineItem(lineItem);
-      
-      //***** Third LineItem
-      lineItem=new MockReceiverWorkOrderLineItem();
-      lineItem.setDescription("THIRD LINE ITEM");
-      addLineItem(lineItem);
-   }
+public class TestCaseQuoteLineItem1 extends MockQuoteLineItem {
+	public TestCaseQuoteLineItem1() {
+		super();
+		setLength(10);
+		setWidth(20);
+		setHeight(30);
+		setWeight(40);
+		setQuantity(10);
+		setDescription("Test description for line item 1.");
+	}
 }

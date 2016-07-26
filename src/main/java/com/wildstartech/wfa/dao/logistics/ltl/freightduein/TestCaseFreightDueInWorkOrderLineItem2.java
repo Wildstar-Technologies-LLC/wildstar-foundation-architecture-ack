@@ -42,40 +42,18 @@
  *      derek.berube@wildstartech.com
  *      www.wildstartech.com
  */
-package com.wildstartech.wfa.dao.logistics.ltl;
+package com.wildstartech.wfa.dao.logistics.ltl.freightduein;
 
-import com.wildstartech.wfa.logistics.ltl.AccessorialCharge;
-import com.wildstartech.wfa.logistics.ltl.MockQuote;
-import com.wildstartech.wfa.logistics.ltl.QuoteLineItem;
+import com.wildstartech.wfa.logistics.ltl.MockFreightDueInWorkOrderLineItem;
 
-public class TestCaseQuote1 extends MockQuote {
-	public TestCaseQuote1() {
-		super();
-		AccessorialCharge charge=null;
-		QuoteLineItem item=null;
-		
-		// Set Basic Quote Information
-		setDistance(327.63f);
-		setContactName("Derek Berube");
-		setContactPhone("404-444-5283");
-		setContactEmail("derek.berube@me.com");
-		setOriginCity("Panama City Beach");
-		setOriginState("FL");
-		setOriginZip("32413");
-		setDestinationCity("Suwanee");
-		setDestinationState("GA");
-		setDestinationZip("30024");
-		setNotes("Some notes would go here.");
-		  
-		// Add Line Items
-		item=new TestCaseQuoteLineItem1();
-		addLineItem(item);
-		item=new TestCaseQuoteLineItem2();
-		addLineItem(item);
-		// Add Accessorials
-		charge=new TestCaseAccessorialCharge1();
-		addAccessorialCharge(charge);
-		charge=new TestCaseAccessorialCharge2();
-		addAccessorialCharge(charge);
-	}
+public class TestCaseFreightDueInWorkOrderLineItem2
+extends MockFreightDueInWorkOrderLineItem {   
+   public TestCaseFreightDueInWorkOrderLineItem2() {
+      this.setDescription("Second Freight Due In Work Order Line Item");
+      this.setLength(15);
+      this.setWidth(25);
+      this.setHeight(35);
+      this.setWeight(59);
+      this.setQuantity(1);
+   }
 }

@@ -42,18 +42,31 @@
  *      derek.berube@wildstartech.com
  *      www.wildstartech.com
  */
-package com.wildstartech.wfa.dao.logistics.ltl;
+package com.wildstartech.wfa.dao.logistics.ltl.receiver;
 
-import com.wildstartech.wfa.logistics.ltl.MockFreightDueInWorkOrderLineItem;
+import org.testng.annotations.BeforeClass;
+import org.testng.annotations.Test;
 
-public class TestCaseFreightDueInWorkOrderLineItem2
-extends MockFreightDueInWorkOrderLineItem {   
-   public TestCaseFreightDueInWorkOrderLineItem2() {
-      this.setDescription("Second Freight Due In Work Order Line Item");
-      this.setLength(15);
-      this.setWidth(25);
-      this.setHeight(35);
-      this.setWeight(59);
-      this.setQuantity(1);
+import com.wildstartech.wfa.dao.logistics.ltl.PersistentReceiverWorkOrder;
+import com.wildstartech.wfa.dao.logistics.ltl.ReceiverWorkOrderDAO;
+import com.wildstartech.wfa.dao.logistics.ltl.ReceiverWorkOrderDAOFactory;
+
+public class PersistentReceiverWorkOrderTest {
+   private ReceiverWorkOrderDAO dao;
+   
+   @BeforeClass
+   public void setup() {
+      ReceiverWorkOrderDAOFactory factory=null;
+      
+      factory=new ReceiverWorkOrderDAOFactory();
+      this.dao=factory.getDAO();
+   }
+   
+   @Test
+   public void test() {
+      PersistentReceiverWorkOrder workOrder=null;
+      
+      workOrder=this.dao.create();
+      workOrder.setBillOfLadingNumber("");
    }
 }

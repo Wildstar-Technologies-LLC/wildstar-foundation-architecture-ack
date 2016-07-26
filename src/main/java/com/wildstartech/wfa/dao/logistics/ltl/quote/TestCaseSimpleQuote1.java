@@ -42,18 +42,22 @@
  *      derek.berube@wildstartech.com
  *      www.wildstartech.com
  */
-package com.wildstartech.wfa.dao.logistics.ltl;
+package com.wildstartech.wfa.dao.logistics.ltl.quote;
 
-import com.wildstartech.wfa.logistics.ltl.MockQuoteLineItem;
+import com.wildstartech.wfa.logistics.ltl.MockSimpleQuote;
 
-public class TestCaseQuoteLineItem2 extends MockQuoteLineItem {
-	public TestCaseQuoteLineItem2() {
-		super();
-		setDescription("Second line item.");
-		setHeight(35);
-		setLength(15);
-		setQuantity(5);
-		setWeight(45);
-		setWidth(25);				
+public class TestCaseSimpleQuote1 extends MockSimpleQuote {
+	public TestCaseSimpleQuote1() {
+		 setDistance(327.63);
+		 setContactName("Derek Berube");
+		 setContactPhone("404-444-5283");
+		 setContactEmail("derek.berube@me.com");
+		 setOriginCity("Panama City Beach");
+		 setOriginState("FL");
+		 setOriginZip("32413");
+		 setDestinationCity("Suwanee");
+		 setDestinationState("GA");
+		 setDestinationZip("30024");
+		 setNotes("Some notes would go here.");  
 	}
 }

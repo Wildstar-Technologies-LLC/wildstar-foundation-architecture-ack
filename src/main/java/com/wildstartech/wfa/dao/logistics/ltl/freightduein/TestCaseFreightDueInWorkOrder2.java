@@ -42,27 +42,24 @@
  *      derek.berube@wildstartech.com
  *      www.wildstartech.com
  */
-package com.wildstartech.wfa.dao.logistics.ltl;
+package com.wildstartech.wfa.dao.logistics.ltl.freightduein;
 
-import org.testng.annotations.BeforeClass;
-import org.testng.annotations.Test;
+import com.wildstartech.wfa.logistics.ltl.MockFreightDueInWorkOrder;
 
-public class PersistentReceiverWorkOrderTest {
-   private ReceiverWorkOrderDAO dao;
+public class TestCaseFreightDueInWorkOrder2 
+extends MockFreightDueInWorkOrder {
    
-   @BeforeClass
-   public void setup() {
-      ReceiverWorkOrderDAOFactory factory=null;
-      
-      factory=new ReceiverWorkOrderDAOFactory();
-      this.dao=factory.getDAO();
-   }
-   
-   @Test
-   public void test() {
-      PersistentReceiverWorkOrder workOrder=null;
-      
-      workOrder=this.dao.create();
-      workOrder.setBillOfLadingNumber("");
-   }
+   public TestCaseFreightDueInWorkOrder2() {
+      setEstimatedShipDate("10/13/2014 10:13 AM");
+      setDateShipped("10/13/2014 12:15 AM");
+      setCarrierName("World Logistics");
+      setCarrierTrackingNumber("WLG9876543210");
+      setContactCompanyName("ACME Incorporated, Inc.");
+      setContactName("Amy Admin");
+      setContactEmail("amy.admin@acme.com");
+      setContactPreferredTelephoneNumber("855-555-1234");
+      setManufacturerName("Foo Inc.");
+      setReferenceIdentifier("PO987654321");
+      setSpecialHandling("You just cannot get away from special handling.");
+   }  
 }

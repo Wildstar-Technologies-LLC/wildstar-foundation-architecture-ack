@@ -42,24 +42,42 @@
  *      derek.berube@wildstartech.com
  *      www.wildstartech.com
  */
-package com.wildstartech.wfa.dao.logistics.ltl;
+package com.wildstartech.wfa.dao.logistics.ltl.receiver;
 
-import com.wildstartech.wfa.logistics.ltl.MockFreightDueInWorkOrder;
+import java.util.Date;
 
-public class TestCaseFreightDueInWorkOrder1 
-extends MockFreightDueInWorkOrder {
+import com.wildstartech.wfa.logistics.ltl.MockReceiverWorkOrderLineItem;
+import com.wildstartech.wfa.logistics.ltl.ReceiverWorkOrderLineItem;
+
+public class TestCaseReceiverWorkOrder1 extends TestCaseReceiverWorkOrderBase {
+   public Date dateReceived=new Date();
    
-   public TestCaseFreightDueInWorkOrder1() {
-      setEstimatedShipDate("10/13/2015 10:13 AM");
-      setDateShipped("10/13/2015 12:15 AM");
-      setCarrierName("World Logistics");
-      setCarrierTrackingNumber("WLG1234567890");
-      setContactCompanyName("ACME Incorporated, Inc.");
-      setContactName("Joe User");
-      setContactEmail("joe.user@acme.com");
-      setContactPreferredTelephoneNumber("800-555-1234");
-      setManufacturerName("Foo Inc.");
-      setReferenceIdentifier("PO987654321");
-      setSpecialHandling("Special handling instructions go here.");
-   }  
+   public TestCaseReceiverWorkOrder1() {
+      ReceiverWorkOrderLineItem lineItem=null;
+      
+      this.setBillOfLadingNumber("BOL1234");
+      this.setInboundCarrier("ACME Furniture Purveyors");
+      this.setDateReceived(this.dateReceived);
+      this.setPurchaseOrderNumber("PO#4321");
+      this.setSalesOrderNumber("SO97531");
+      this.setShortDescription("Short Description");
+      this.setStatusState("New");
+      this.setStatusReason("");
+      this.setTitle("Receiver Work Order Test Case");
+      
+      //***** First LineItem
+      lineItem=new MockReceiverWorkOrderLineItem();
+      lineItem.setDescription("FIRST LINE ITEM");
+      addLineItem(lineItem);
+      
+      //***** Second LineItem
+      lineItem=new MockReceiverWorkOrderLineItem();
+      lineItem.setDescription("SECOND LINE ITEM");
+      addLineItem(lineItem);
+      
+      //***** Third LineItem
+      lineItem=new MockReceiverWorkOrderLineItem();
+      lineItem.setDescription("THIRD LINE ITEM");
+      addLineItem(lineItem);
+   }
 }

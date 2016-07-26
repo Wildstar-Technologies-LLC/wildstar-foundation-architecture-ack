@@ -43,7 +43,7 @@
  *      derek.berube@wildstartech.com
  *      www.wildstartech.com
  */
-package com.wildstartech.wfa.dao.logistics.ltl;
+package com.wildstartech.wfa.dao.logistics.ltl.receiver;
 
 import java.util.ArrayList;
 import java.util.List;

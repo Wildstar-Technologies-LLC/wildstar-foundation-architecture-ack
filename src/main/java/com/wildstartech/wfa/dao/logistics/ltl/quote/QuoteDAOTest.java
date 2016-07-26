@@ -42,7 +42,7 @@
  *      derek.berube@wildstartech.com
  *      www.wildstartech.com
  */
-package com.wildstartech.wfa.dao.logistics.ltl;
+package com.wildstartech.wfa.dao.logistics.ltl.quote;
 
 import java.util.Date;
 import java.util.List;
@@ -60,7 +60,6 @@ import com.wildstartech.wfa.dao.logistics.ltl.QuoteDAO;
 import com.wildstartech.wfa.dao.logistics.ltl.QuoteDAOFactory;
 import com.wildstartech.wfa.dao.logistics.ltl.QuoteLineItemDAO;
 import com.wildstartech.wfa.dao.logistics.ltl.QuoteLineItemDAOFactory;
-import com.wildstartech.wfa.dao.logistics.ltl.TestCaseQuote1;
 import com.wildstartech.wfa.logistics.ltl.Quote;
 import com.wildstartech.wfa.logistics.ltl.QuoteLineItem;
 

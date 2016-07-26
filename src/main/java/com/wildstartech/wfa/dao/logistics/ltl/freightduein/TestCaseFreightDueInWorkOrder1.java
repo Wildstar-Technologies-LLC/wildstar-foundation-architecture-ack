@@ -42,18 +42,24 @@
  *      derek.berube@wildstartech.com
  *      www.wildstartech.com
  */
-package com.wildstartech.wfa.dao.logistics.ltl;
+package com.wildstartech.wfa.dao.logistics.ltl.freightduein;
 
-import com.wildstartech.wfa.logistics.ltl.MockEditableCommodityLineItem;
+import com.wildstartech.wfa.logistics.ltl.MockFreightDueInWorkOrder;
 
-public class TestCaseFreightDueInWorkOrderLineItem1
-extends MockEditableCommodityLineItem {   
-   public TestCaseFreightDueInWorkOrderLineItem1() {
-      this.setDescription("Test Line Item for Freight Due In Work Order");
-      this.setLength(10);
-      this.setWidth(20);
-      this.setHeight(30);
-      this.setWeight(90);
-      this.setQuantity(1);
-   }
+public class TestCaseFreightDueInWorkOrder1 
+extends MockFreightDueInWorkOrder {
+   
+   public TestCaseFreightDueInWorkOrder1() {
+      setEstimatedShipDate("10/13/2015 10:13 AM");
+      setDateShipped("10/13/2015 12:15 AM");
+      setCarrierName("World Logistics");
+      setCarrierTrackingNumber("WLG1234567890");
+      setContactCompanyName("ACME Incorporated, Inc.");
+      setContactName("Joe User");
+      setContactEmail("joe.user@acme.com");
+      setContactPreferredTelephoneNumber("800-555-1234");
+      setManufacturerName("Foo Inc.");
+      setReferenceIdentifier("PO987654321");
+      setSpecialHandling("Special handling instructions go here.");
+   }  
 }

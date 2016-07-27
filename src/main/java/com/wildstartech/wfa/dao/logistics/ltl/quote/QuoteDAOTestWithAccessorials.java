@@ -51,8 +51,6 @@ import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
 import com.wildstartech.wfa.dao.UserData;
-import com.wildstartech.wfa.dao.UserContext;
-import com.wildstartech.wfa.dao.UserContextDAOFactory;
 import com.wildstartech.wfa.dao.WildDAOTest;
 import com.wildstartech.wfa.dao.logistics.ltl.AccessorialChargeDAO;
 import com.wildstartech.wfa.dao.logistics.ltl.AccessorialChargeDAOFactory;
@@ -63,6 +61,8 @@ import com.wildstartech.wfa.dao.logistics.ltl.QuoteDAO;
 import com.wildstartech.wfa.dao.logistics.ltl.QuoteDAOFactory;
 import com.wildstartech.wfa.dao.logistics.ltl.QuoteLineItemDAO;
 import com.wildstartech.wfa.dao.logistics.ltl.QuoteLineItemDAOFactory;
+import com.wildstartech.wfa.dao.user.UserContext;
+import com.wildstartech.wfa.dao.user.UserContextDAOFactory;
 import com.wildstartech.wfa.finance.ChargeDescriptionTooLongException;
 import com.wildstartech.wfa.logistics.ltl.AccessorialCharge;
 import com.wildstartech.wfa.logistics.ltl.Quote;

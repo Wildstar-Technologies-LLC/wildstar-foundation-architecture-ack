@@ -54,7 +54,7 @@ import java.util.TreeMap;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-import com.wildstartech.wfa.dao.UserContextDAO;
+import com.wildstartech.wfa.dao.user.UserContextDAO;
 
 public class UserData {
 	private static String _CLASS = UserData.class.getName();

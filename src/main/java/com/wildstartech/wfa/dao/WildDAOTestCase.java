@@ -51,10 +51,10 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.util.Properties;
 
-import com.wildstartech.wfa.dao.PersistentUser;
-import com.wildstartech.wfa.dao.UserDAO;
-import com.wildstartech.wfa.dao.UserDAOFactory;
 import com.wildstartech.wfa.dao.WildDAO;
+import com.wildstartech.wfa.dao.user.PersistentUser;
+import com.wildstartech.wfa.dao.user.UserDAO;
+import com.wildstartech.wfa.dao.user.UserDAOFactory;
 import com.wildstartech.wfa.user.PasswordTooLongException;
 import com.wildstartech.wfa.user.UserNameTooLongException;
 

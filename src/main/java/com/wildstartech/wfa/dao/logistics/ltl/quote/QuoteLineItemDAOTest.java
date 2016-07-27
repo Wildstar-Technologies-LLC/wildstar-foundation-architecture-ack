@@ -50,13 +50,13 @@ import java.util.List;
 import org.testng.annotations.Test;
 
 import com.wildstartech.wfa.dao.UserData;
-import com.wildstartech.wfa.dao.UserContext;
-import com.wildstartech.wfa.dao.UserContextDAOFactory;
 import com.wildstartech.wfa.dao.WildDAOTest;
 import com.wildstartech.wfa.dao.WildObject;
 import com.wildstartech.wfa.dao.logistics.ltl.PersistentQuoteLineItem;
 import com.wildstartech.wfa.dao.logistics.ltl.QuoteLineItemDAO;
 import com.wildstartech.wfa.dao.logistics.ltl.QuoteLineItemDAOFactory;
+import com.wildstartech.wfa.dao.user.UserContext;
+import com.wildstartech.wfa.dao.user.UserContextDAOFactory;
 import com.wildstartech.wfa.logistics.ltl.QuoteLineItem;
 
 public class QuoteLineItemDAOTest extends WildDAOTest {

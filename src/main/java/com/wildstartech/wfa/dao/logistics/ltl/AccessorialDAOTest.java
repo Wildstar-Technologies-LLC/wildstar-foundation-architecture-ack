@@ -49,10 +49,10 @@ import java.util.Date;
 import org.testng.annotations.Test;
 
 import com.wildstartech.wfa.dao.UserData;
-import com.wildstartech.wfa.dao.UserContext;
-import com.wildstartech.wfa.dao.UserContextDAOFactory;
 import com.wildstartech.wfa.dao.WildDAOTest;
 import com.wildstartech.wfa.dao.WildObject;
+import com.wildstartech.wfa.dao.user.UserContext;
+import com.wildstartech.wfa.dao.user.UserContextDAOFactory;
 import com.wildstartech.wfa.finance.ChargeDescriptionTooLongException;
 import com.wildstartech.wfa.logistics.ltl.AccessorialCharge;
 

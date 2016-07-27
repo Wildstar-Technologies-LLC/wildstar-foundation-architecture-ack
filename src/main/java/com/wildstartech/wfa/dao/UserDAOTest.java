@@ -51,12 +51,12 @@ import java.util.Set;
 
 import org.testng.AssertJUnit;
 
-import com.wildstartech.wfa.dao.PersistentUser;
-import com.wildstartech.wfa.dao.UserContext;
-import com.wildstartech.wfa.dao.UserContextDAO;
-import com.wildstartech.wfa.dao.UserContextDAOFactory;
-import com.wildstartech.wfa.dao.UserDAO;
-import com.wildstartech.wfa.dao.UserDAOFactory;
+import com.wildstartech.wfa.dao.user.PersistentUser;
+import com.wildstartech.wfa.dao.user.UserContext;
+import com.wildstartech.wfa.dao.user.UserContextDAO;
+import com.wildstartech.wfa.dao.user.UserContextDAOFactory;
+import com.wildstartech.wfa.dao.user.UserDAO;
+import com.wildstartech.wfa.dao.user.UserDAOFactory;
 import com.wildstartech.wfa.user.PasswordTooLongException;
 import com.wildstartech.wfa.user.User;
 import com.wildstartech.wfa.user.UserNameTooLongException;

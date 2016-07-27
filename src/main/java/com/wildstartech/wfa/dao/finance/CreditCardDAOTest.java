@@ -46,14 +46,14 @@ package com.wildstartech.wfa.dao.finance;
 
 import org.testng.annotations.Test;
 
-import com.wildstartech.wfa.dao.UserContext;
-import com.wildstartech.wfa.dao.UserContextDAOFactory;
 import com.wildstartech.wfa.dao.UserData;
 import com.wildstartech.wfa.dao.WildDAO;
 import com.wildstartech.wfa.dao.WildDAOTest;
 import com.wildstartech.wfa.dao.finance.CreditCardDAO;
 import com.wildstartech.wfa.dao.finance.CreditCardDAOFactory;
 import com.wildstartech.wfa.dao.finance.PersistentCreditCard;
+import com.wildstartech.wfa.dao.user.UserContext;
+import com.wildstartech.wfa.dao.user.UserContextDAOFactory;
 import com.wildstartech.wfa.finance.CreditCard;
 import com.wildstartech.wfa.finance.SampleCreditCardData;
 

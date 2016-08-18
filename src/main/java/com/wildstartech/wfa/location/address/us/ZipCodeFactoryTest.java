@@ -121,6 +121,18 @@ public class ZipCodeFactoryTest {
      assert city.getName().equals("Carlsbad");
      assert city.getStateAbbreviation().equals("CA");
   }
+  //***** 92081 Vista, CA (33.164376523138,  33.164376523138)
+  @Test(dependsOnMethods = { "getInstanceTest" })
+  public void get92081VistaCA() {
+     City city=null;
+     PostalCodeFactory factory=null;
+     
+     factory=PostalCodeFactory.getInstance();
+     city=factory.getCity("92081");
+     assert city != null;
+     assert city.getName().equals("Vista");
+     assert city.getStateAbbreviation().equals("CA");
+  }
   //***** 93619 Clovis, CA  (36.843, -119.652)
   @Test(dependsOnMethods = { "getInstanceTest" })
   public void get93619ClovisCA() {
@@ -182,5 +194,15 @@ public class ZipCodeFactoryTest {
      assert city.getStateAbbreviation().equals("OR");
   }
   //***** 97089 Damascus, OR  (45.422, -122.45)
-
+  @Test(dependsOnMethods = { "getInstanceTest" })
+  public void get97089DamascusOR() {
+     City city=null;
+     PostalCodeFactory factory=null;
+     
+     factory=PostalCodeFactory.getInstance();
+     city=factory.getCity("97089");
+     assert city != null;
+     assert city.getName().equals("Damascus");
+     assert city.getStateAbbreviation().equals("OR");
+  }
 }

@@ -97,6 +97,18 @@ public class ZipCodeFactoryTest {
     assert city.getName().equals("Panama City Beach");
     assert city.getStateAbbreviation().equals("FL");
   }
+  //***** 89515 Reno, NV
+  @Test(dependsOnMethods = { "getInstanceTest" })
+  public void getNVReno89515Test() {
+    City city=null;
+    PostalCodeFactory factory=null;
+    
+    factory=PostalCodeFactory.getInstance();
+    city=factory.getCity("89515");
+    assert city != null;
+    assert city.getName().equals("Reno");
+    assert city.getStateAbbreviation().equals("NV");
+  }
   //***** 92010 Carlsbad, CA  (33.107, -117.287)
   @Test(dependsOnMethods = { "getInstanceTest" })
   public void get92010CarlsbadCA() {

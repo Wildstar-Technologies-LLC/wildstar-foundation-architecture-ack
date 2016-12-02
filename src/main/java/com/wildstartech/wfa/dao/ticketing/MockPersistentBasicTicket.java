@@ -47,7 +47,12 @@ package com.wildstartech.wfa.dao.ticketing;
 import java.util.Date;
 import java.util.List;
 
-public class MockPersistentBasicTicket implements PersistentBasicTicket {
+import com.wildstartech.wfa.dao.MockWildObject;
+import com.wildstartech.wfa.ticketing.MockBasicTicket;
+
+public class MockPersistentBasicTicket 
+extends MockWildObject
+implements PersistentBasicTicket<MockBasicTicket> {
 
    @Override
    public String getRequestId() {

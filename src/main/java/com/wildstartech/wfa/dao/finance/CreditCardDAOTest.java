@@ -139,8 +139,8 @@ public class CreditCardDAOTest extends WildDAOTest {
       dao=factory.getDAO();
       creditCard=SampleCreditCardData.amex[0];
       ctx=UserContextDAOFactory.authenticate(
-            userData.getUserName("derekberube"),
-            userData.getUserPassword("derekberube"));
+            userData.getAdminUserName(),
+            userData.getAdminPassword());
       pCreditCard=dao.save(creditCard, ctx);
       
       assert pCreditCard != null;
@@ -174,7 +174,10 @@ public class CreditCardDAOTest extends WildDAOTest {
       referenceValue=SampleCreditCardData.amex[0].getAccountNumber();
       assert savedValue != null;
       assert savedValue.length() == referenceValue.length();
-      assert savedValue.equalsIgnoreCase(referenceValue);
+      assert savedValue.substring(
+            savedValue.length() - 4, savedValue.length()).equals(
+                  referenceValue.substring(
+                        referenceValue.length() - 4, referenceValue.length()));
       // Check brandName
       savedValue=pCreditCard.getBrandName();
       referenceValue=SampleCreditCardData.amex[0].getBrandName();

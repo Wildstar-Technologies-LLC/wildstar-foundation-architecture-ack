@@ -47,7 +47,6 @@ package com.wildstartech.wfa.dao.logistics.ltl.quote;
 import java.util.Date;
 import java.util.List;
 
-import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
 import com.wildstartech.wfa.dao.UserData;
@@ -78,15 +77,21 @@ import com.wildstartech.wfa.logistics.ltl.QuoteLineItem;
  * @version 0.1
  */
 public class QuoteDAOTest extends WildDAOTest {
-	private PersistentQuote quote = null;
-	// Quote Test Data
-	private Quote testCase1;
-
-	@BeforeClass
-	public void initializeTestCases() {
-		this.testCase1 = new TestCaseQuote1();
+	
+	/**
+	 * Tests the ability to get a data access object from the DAO factory.
+	 * 
+	 */
+	@Test
+	public void testDAO() {
+	   QuoteDAO dao=null;
+	   QuoteDAOFactory factory=null;
+	   
+	   factory=new QuoteDAOFactory();
+	   dao=factory.getDAO();
+	   
+	   assert dao != null;
 	}
-
 	/**
 	 * Tests the basic creation of an <code>Quote</code> object.
 	 * 
@@ -98,25 +103,28 @@ public class QuoteDAOTest extends WildDAOTest {
 	 * interface.
 	 * </p>
 	 */
-	@Test
+	@Test(dependsOnMethods={"testDAO"})
 	public void testCreate() {
 		QuoteDAO dao = null;
 		QuoteDAOFactory factory = null;
-
+		PersistentQuote pQuote=null;
+		
 		factory = new QuoteDAOFactory();
 		dao = factory.getDAO();
-		this.quote = (PersistentQuote) dao.create();
-		assert this.quote instanceof Quote;
-		assert this.quote instanceof PersistentQuote;
+		pQuote = (PersistentQuote) dao.create();
+		assert pQuote instanceof Quote;
+		assert pQuote instanceof PersistentQuote;
 	}
 
 	/**
 	 * Tests the ability to properly save an instance of a <code>Quote</code>.
 	 */
-	@Test(dependsOnMethods = { "testCreate" })
+	@Test
 	public void testSaveNoLineItems() {
 		Date createDate = null;
 		Date modifiedDate = null;
+		PersistentQuote pQuote=null;
+		Quote testCase=null;
 		QuoteDAO dao = null;
 		QuoteDAOFactory factory = null;
 		String id = null;
@@ -125,36 +133,28 @@ public class QuoteDAOTest extends WildDAOTest {
 		UserData userData = null;
 
 		userData = UserData.getInstance();
-		ctx = UserContextDAOFactory.authenticate(userData.getAdminUserName(), userData.getAdminPassword());
+		ctx = UserContextDAOFactory.authenticate(
+		      userData.getAdminUserName(), userData.getAdminPassword());
 		assert ctx != null;
 		// Let's prepare the data
-		this.quote.setContactName(this.testCase1.getContactName());
-		this.quote.setContactPhone(this.testCase1.getContactPhone());
-		this.quote.setContactEmail(this.testCase1.getContactEmail());
-		this.quote.setOriginCity(this.testCase1.getOriginCity());
-		this.quote.setOriginState(this.testCase1.getOriginState());
-		this.quote.setOriginZip(this.testCase1.getOriginZip());
-		this.quote.setDestinationCity(this.testCase1.getDestinationCity());
-		this.quote.setDestinationState(this.testCase1.getDestinationState());
-		this.quote.setDestinationZip(this.testCase1.getDestinationZip());
-		this.quote.setDistance(this.testCase1.getDistance());
-		this.quote.setNotes(this.testCase1.getNotes());
+		testCase=new TestCaseQuote1();
+		
 		// Let's get ready to save.
 		factory = new QuoteDAOFactory();
 		dao = factory.getDAO();
-		this.quote = dao.save(this.quote, ctx);
-		id = this.quote.getIdentifier();
+		pQuote = dao.save(testCase, ctx);
+		id = pQuote.getIdentifier();
 		assert id != null;
-		name = this.quote.getCreatedBy();
+		name = pQuote.getCreatedBy();
 		assert name != null;
 		// Ensure the user who created the object is the admin user
 		assert name.compareTo(userData.getAdminUserName()) == 0;
-		name = this.quote.getModifiedBy();
+		name = pQuote.getModifiedBy();
 		assert name != null;
 		// Ensure the user who modified the object is the admin user
 		assert name.compareTo(userData.getAdminUserName()) == 0;
 		// Validate dateCreated
-		createDate = this.quote.getDateCreated();
+		createDate = pQuote.getDateCreated();
 		assert createDate != null;
 		/*
 		 * Ensure the value stored as the dateCreated is within 1000
@@ -162,26 +162,27 @@ public class QuoteDAOTest extends WildDAOTest {
 		 */
 		assert new Date().getTime() - 1000 <= createDate.getTime();
 		// Validate dateModified
-		modifiedDate = this.quote.getDateModified();
+		modifiedDate = pQuote.getDateModified();
 		assert modifiedDate != null;
 		// Ensure the modified date is equal to the createDate.
 		assert modifiedDate.getTime() == createDate.getTime();
 
-		assert this.quote.getContactName().compareTo(this.testCase1.getContactName()) == 0;
-		assert this.quote.getContactEmail().compareTo(this.testCase1.getContactEmail()) == 0;
-		assert this.quote.getContactPhone().compareTo(this.testCase1.getContactPhone()) == 0;
-		assert this.quote.getOriginCity().compareTo(this.testCase1.getOriginCity()) == 0;
-		assert this.quote.getOriginState().compareTo(this.testCase1.getOriginState()) == 0;
-		assert this.quote.getOriginZip().compareTo(this.testCase1.getOriginZip()) == 0;
-		assert this.quote.getDestinationCity().compareTo(this.testCase1.getDestinationCity()) == 0;
-		assert this.quote.getDestinationState().compareTo(this.testCase1.getDestinationState()) == 0;
-		assert this.quote.getDestinationZip().compareTo(this.testCase1.getDestinationZip()) == 0;
-		assert this.quote.getDistance() == this.testCase1.getDistance();
-		assert this.quote.getNotes().compareTo(this.testCase1.getNotes()) == 0;		
+		assert pQuote.getContactName().compareTo(testCase.getContactName()) == 0;
+		assert pQuote.getContactEmail().compareTo(testCase.getContactEmail()) == 0;
+		assert pQuote.getContactPhone().compareTo(testCase.getContactPhone()) == 0;
+		assert pQuote.getOriginCity().compareTo(testCase.getOriginCity()) == 0;
+		assert pQuote.getOriginState().compareTo(testCase.getOriginState()) == 0;
+		assert pQuote.getOriginZip().compareTo(testCase.getOriginZip()) == 0;
+		assert pQuote.getDestinationCity().compareTo(testCase.getDestinationCity()) == 0;
+		assert pQuote.getDestinationState().compareTo(testCase.getDestinationState()) == 0;
+		assert pQuote.getDestinationZip().compareTo(testCase.getDestinationZip()) == 0;
+		assert pQuote.getDistance() == testCase.getDistance();
+		assert pQuote.getNotes().compareTo(testCase.getNotes()) == 0;		
 	}
 
-	@Test(dependsOnMethods = { "testSaveNoLineItems" })
+	@Test
 	public void testFindByIdentifier() {
+	   Quote testCase=null;
 		PersistentQuote pQuote = null;
 		QuoteDAO dao = null;
 		String id = null;
@@ -189,142 +190,28 @@ public class QuoteDAOTest extends WildDAOTest {
 		UserData userData = null;
 
 		userData = UserData.getInstance();
-		ctx = UserContextDAOFactory.authenticate(userData.getAdminUserName(), userData.getAdminPassword());
+		ctx = UserContextDAOFactory.authenticate(
+		      userData.getAdminUserName(), userData.getAdminPassword());
 		dao = new QuoteDAOFactory().getDAO();
-		id = this.quote.getIdentifier();
+		
+		testCase=new TestCaseQuote1();
+		pQuote=dao.save(testCase, ctx);
+		id = pQuote.getIdentifier();
 		pQuote = dao.findByIdentifier(id, ctx);
 
 		assert pQuote != null;
-		assert pQuote.getContactName().compareTo(this.testCase1.getContactName()) == 0;
-		assert pQuote.getContactEmail().compareTo(this.testCase1.getContactEmail()) == 0;
-		assert pQuote.getContactPhone().compareTo(this.testCase1.getContactPhone()) == 0;
-		assert pQuote.getOriginCity().compareTo(this.testCase1.getOriginCity()) == 0;
-		assert pQuote.getOriginState().compareTo(this.testCase1.getOriginState()) == 0;
-		assert pQuote.getOriginZip().compareTo(this.testCase1.getOriginZip()) == 0;
-		assert pQuote.getDestinationCity().compareTo(this.testCase1.getDestinationCity()) == 0;
-		assert pQuote.getDestinationState().compareTo(this.testCase1.getDestinationState()) == 0;
-		assert pQuote.getDestinationZip().compareTo(this.testCase1.getDestinationZip()) == 0;
-		assert pQuote.getDistance() == this.testCase1.getDistance();
-		assert pQuote.getNotes().compareTo(this.testCase1.getNotes()) == 0;
+		assert pQuote.getContactName().compareTo(testCase.getContactName()) == 0;
+      assert pQuote.getContactEmail().compareTo(testCase.getContactEmail()) == 0;
+      assert pQuote.getContactPhone().compareTo(testCase.getContactPhone()) == 0;
+      assert pQuote.getOriginCity().compareTo(testCase.getOriginCity()) == 0;
+      assert pQuote.getOriginState().compareTo(testCase.getOriginState()) == 0;
+      assert pQuote.getOriginZip().compareTo(testCase.getOriginZip()) == 0;
+      assert pQuote.getDestinationCity().compareTo(testCase.getDestinationCity()) == 0;
+      assert pQuote.getDestinationState().compareTo(testCase.getDestinationState()) == 0;
+      assert pQuote.getDestinationZip().compareTo(testCase.getDestinationZip()) == 0;
+      assert pQuote.getDistance() == testCase.getDistance();
+      assert pQuote.getNotes().compareTo(testCase.getNotes()) == 0;
 	}
 
-	/**
-	 * Test the method to find ALL the quotes.
-	 */
-	@Test(dependsOnMethods = { "testSaveNoLineItems", "testFindByIdentifier" })
-	public void testFindAllQuotes() {
-		List<PersistentQuote> quotes = null;
-		QuoteDAO dao = null;
-		QuoteDAOFactory factory = null;
-		UserContext ctx = null;
-		UserData userData = null;
-
-		userData = UserData.getInstance();
-		// Log in.
-		ctx = UserContextDAOFactory.authenticate(userData.getAdminUserName(), userData.getAdminPassword());
-		factory = new QuoteDAOFactory();
-		dao = factory.getDAO();
-		quotes = dao.findAll(ctx);
-		assert quotes != null;
-		assert quotes.size() == 1;
-	}
-
-	@Test(dependsOnMethods = { "testFindAllQuotes" })
-	public void testQuoteLineItems() {
-		QuoteLineItem item = null;
-		QuoteLineItem testItem = null;
-		QuoteLineItemDAO dao = null;
-		Date modifiedDate = null;
-		QuoteDAO qDao = null;
-		UserContext ctx = null;
-		UserData userData = null;
-
-		userData = UserData.getInstance();
-		testItem = this.testCase1.getLineItem(0);
-		ctx = UserContextDAOFactory.authenticate(userData.getAdminUserName(), userData.getAdminPassword());
-		dao = new QuoteLineItemDAOFactory().getDAO();
-		qDao = new QuoteDAOFactory().getDAO();
-		item = dao.create();
-		// Populate the line item with data.
-		item.setDescription(testItem.getDescription());
-		item.setHeight(testItem.getHeight());
-		item.setLength(testItem.getLength());
-		item.setWidth(testItem.getWidth());
-		item.setWeight(testItem.getWeight());
-		item.setQuantity(testItem.getQuantity());
-		item.setDescription(testItem.getDescription());
-		this.quote.addLineItem(item);
-		this.quote = (PersistentQuote) qDao.save(this.quote, ctx);
-
-		// Validate dateModified
-		modifiedDate = this.quote.getDateModified();
-		assert modifiedDate != null;
-	}
-
-	@Test(dependsOnMethods = { "testQuoteLineItems" })
-	public void testQuoteLineItemSave() {
-		List<QuoteLineItem> lineItems = null;
-		Quote quote = null;
-		QuoteDAO dao = null;
-		QuoteLineItem lineItem = null;
-		QuoteLineItem testItem = null;
-		String quoteId = null;
-		UserContext ctx = null;
-		UserData userData = null;
-
-		userData = UserData.getInstance();
-		testItem = this.testCase1.getLineItem(0);
-		ctx = UserContextDAOFactory.authenticate(userData.getAdminUserName(), userData.getAdminPassword());
-		dao = new QuoteDAOFactory().getDAO();
-		quoteId = this.quote.getIdentifier();
-		quote = dao.findByIdentifier(quoteId, ctx);
-		assert quote != null;
-		lineItems = quote.getLineItems();
-		assert lineItems != null;
-		assert lineItems.size() == 1;
-		lineItem = lineItems.get(0);
-		assert lineItem != null;
-		assert lineItem.getLength() == testItem.getLength();
-		assert lineItem.getWidth() == testItem.getWidth();
-		assert lineItem.getHeight() == testItem.getHeight();
-		assert lineItem.getQuantity() == testItem.getQuantity();
-		assert lineItem.getDescription().equals(testItem.getDescription());
-	}
-
-	@Test(dependsOnMethods = { "testQuoteLineItems", "testQuoteLineItemSave" })
-	public void testCorrectLineItems() {
-		QuoteLineItem newQli = null;
-		QuoteLineItem testLineItem = null;
-		QuoteLineItemDAO dao = null;
-		List<QuoteLineItem> items = null;
-		PersistentQuote quote = null;
-		QuoteDAO qDao = null;
-		UserContext ctx = null;
-		UserData userData = null;
-
-		userData = UserData.getInstance();
-		testLineItem = this.testCase1.getLineItem(1);
-		ctx = UserContextDAOFactory.authenticate(userData.getAdminUserName(), userData.getAdminPassword());
-		dao = new QuoteLineItemDAOFactory().getDAO();
-		qDao = new QuoteDAOFactory().getDAO();
-		newQli = dao.create();
-		newQli.setLength(testLineItem.getLength());
-		newQli.setWidth(testLineItem.getWidth());
-		newQli.setHeight(testLineItem.getHeight());
-		newQli.setWeight(testLineItem.getWeight());
-		newQli.setQuantity(testLineItem.getQuantity());
-		newQli.setDescription(testLineItem.getDescription());
-		newQli = dao.save(newQli, ctx);
-		newQli = dao.findByIdentifier(((PersistentQuoteLineItem) newQli).getIdentifier(), ctx);
-		assert newQli != null;
-		quote = (PersistentQuote) qDao.findByIdentifier(this.quote.getIdentifier(), ctx);
-		for (int i = 0; i < 1000; i++) {
-			items = quote.getLineItems();
-			assert items != null;
-			assert items.size() == 1;
-			items.get(0).setDescription("LineItem Description Updated " + i + " times.");
-			quote = (PersistentQuote) qDao.save(quote, ctx);
-		} // END for (int i=0; i < 1000; i++)
-
-	}
+	
 }

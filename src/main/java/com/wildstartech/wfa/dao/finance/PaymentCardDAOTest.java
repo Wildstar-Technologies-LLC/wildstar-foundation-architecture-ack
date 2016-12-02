@@ -42,56 +42,40 @@
  *      derek.berube@wildstartech.com
  *      www.wildstartech.com
  */
-package com.wildstartech.wfa.finance;
+package com.wildstartech.wfa.dao.finance;
 
 import org.testng.annotations.Test;
 
-import com.wildstartech.wfa.dao.finance.PersistentPaymentCard;
+import com.wildstartech.wfa.dao.WildDAOTest;
+import com.wildstartech.wfa.finance.PaymentCard;
 
-public class PaymentCardTest {
-   private PersistentPaymentCard<PaymentCard> paymentCard=null;
-   private PaymentCard referenceCard=SampleCreditCardData.amex[0];
-   
-   
+public class PaymentCardDAOTest extends WildDAOTest {
    @Test
-   public void accountNumber() {
-      String accountNumber=null;
-      String readAccountNumber=null;
-
-      accountNumber=this.referenceCard.getAccountNumber();
+   public void getDAO() {
+      PaymentCardDAO<PaymentCard,PersistentPaymentCard<PaymentCard>> dao=null;
+      PaymentCardDAOFactory<PaymentCard,PersistentPaymentCard<PaymentCard>> factory=null;
       
-      this.paymentCard.setAccountNumber(accountNumber);
-      readAccountNumber=this.paymentCard.getAccountNumber();
+      factory=new PaymentCardDAOFactory<PaymentCard,PersistentPaymentCard<PaymentCard>>();
+      dao=factory.getDAO();
       
-      assert readAccountNumber != null;
-      assert readAccountNumber.equals(accountNumber);
+      assert dao != null;
    }
    
    @Test
-   public void brandName() {
-      String brandName=null;
-      String readBrandName=null;
+   public void create() {
+      PaymentCard card=null;
+      PaymentCardDAO<PaymentCard,PersistentPaymentCard<PaymentCard>> dao=null;
+      PaymentCardDAOFactory<PaymentCard,PersistentPaymentCard<PaymentCard>> factory=null;
       
-      brandName=this.referenceCard.getBrandName();
+      factory=new PaymentCardDAOFactory<PaymentCard,PersistentPaymentCard<PaymentCard>>();
+      dao=factory.getDAO();
+      card=dao.create();
       
-      this.paymentCard.setBrandName(brandName);
-      readBrandName=this.paymentCard.getBrandName();
-      
-      assert readBrandName != null;
-      assert readBrandName.equals(brandName);
+      assert card != null;
    }
    
    @Test
-   public void issuingBankName() {
-      String issuingBankName=null;
-      String readIssuingBankName=null;
+   public void save() {
       
-      issuingBankName=this.referenceCard.getIssuingBankName();
-      
-      this.paymentCard.setIssuingBankName(issuingBankName);
-      readIssuingBankName=this.paymentCard.getIssuingBankName();
-      
-      assert readIssuingBankName != null;
-      assert readIssuingBankName.equals(issuingBankName);
    }
 }

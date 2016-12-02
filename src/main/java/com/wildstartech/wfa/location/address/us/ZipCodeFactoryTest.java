@@ -145,6 +145,18 @@ public class ZipCodeFactoryTest {
      assert city.getName().equals("Vista");
      assert city.getStateAbbreviation().equals("CA");
   }
+  //***** 93314 Bakersfield, CA (35.387927, -119.236320)
+  @Test(dependsOnMethods = { "getInstanceTest" })
+  public void get93314BakersfieldCATest() {
+     City city=null;
+     PostalCodeFactory factory=null;
+
+     factory=PostalCodeFactory.getInstance();
+     city=factory.getCity("93314");
+     assert city != null;
+     assert city.getName().equals("Bakersfield");
+     assert city.getStateAbbreviation().equals("CA");
+  }
   //***** 93619 Clovis, CA  (36.843, -119.652)
   @Test(dependsOnMethods = { "getInstanceTest" })
   public void get93619ClovisCA() {

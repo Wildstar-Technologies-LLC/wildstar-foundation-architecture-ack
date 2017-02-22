@@ -52,12 +52,9 @@ import org.testng.annotations.Test;
 import com.wildstartech.wfa.dao.UserData;
 import com.wildstartech.wfa.dao.WildDAOTest;
 import com.wildstartech.wfa.dao.WildObject;
-import com.wildstartech.wfa.dao.logistics.ltl.PersistentQuoteLineItem;
-import com.wildstartech.wfa.dao.logistics.ltl.QuoteLineItemDAO;
-import com.wildstartech.wfa.dao.logistics.ltl.QuoteLineItemDAOFactory;
 import com.wildstartech.wfa.dao.user.UserContext;
 import com.wildstartech.wfa.dao.user.UserContextDAOFactory;
-import com.wildstartech.wfa.logistics.ltl.QuoteLineItem;
+import com.wildstartech.wfa.logistics.ltl.quote.QuoteLineItem;
 
 public class QuoteLineItemDAOTest extends WildDAOTest {
   private PersistentQuoteLineItem pQli = null;

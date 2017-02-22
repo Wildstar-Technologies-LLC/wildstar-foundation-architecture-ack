@@ -49,6 +49,8 @@ import java.util.Date;
 import java.util.List;
 
 import com.wildstartech.wfa.journal.JournalEntry;
+import com.wildstartech.wfa.logistics.ltl.receiver.ReceiverWorkOrder;
+import com.wildstartech.wfa.logistics.ltl.receiver.ReceiverWorkOrderLineItem;
 import com.wildstartech.wfa.ticketing.MockBasicTicket;
 
 public class MockReceiverWorkOrder extends MockBasicTicket

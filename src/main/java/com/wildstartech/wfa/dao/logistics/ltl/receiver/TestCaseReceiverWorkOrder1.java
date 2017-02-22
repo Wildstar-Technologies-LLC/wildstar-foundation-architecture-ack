@@ -47,7 +47,7 @@ package com.wildstartech.wfa.dao.logistics.ltl.receiver;
 import java.util.Date;
 
 import com.wildstartech.wfa.logistics.ltl.MockReceiverWorkOrderLineItem;
-import com.wildstartech.wfa.logistics.ltl.ReceiverWorkOrderLineItem;
+import com.wildstartech.wfa.logistics.ltl.receiver.ReceiverWorkOrderLineItem;
 
 public class TestCaseReceiverWorkOrder1 extends TestCaseReceiverWorkOrderBase {
    public Date dateReceived=new Date();

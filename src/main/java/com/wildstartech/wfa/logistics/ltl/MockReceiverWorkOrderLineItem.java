@@ -47,6 +47,7 @@ package com.wildstartech.wfa.logistics.ltl;
 import com.wildstartech.wfa.journal.JournalEntry;
 import com.wildstartech.wfa.logistics.MockWarehouseLocation;
 import com.wildstartech.wfa.logistics.WarehouseLocation;
+import com.wildstartech.wfa.logistics.ltl.receiver.ReceiverWorkOrderLineItem;
 
 public class MockReceiverWorkOrderLineItem 
 extends MockLineItem

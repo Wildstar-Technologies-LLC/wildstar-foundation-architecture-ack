@@ -73,6 +73,7 @@ public class EvaluateHaversineAlgorithm {
     doTest(28,20758,20541);
     // Etlan, VA to Laurel, MS
     doTest(860,22719,39442);
+    
   }
   
   private void doTest(int expected, int zip1, int zip2) {

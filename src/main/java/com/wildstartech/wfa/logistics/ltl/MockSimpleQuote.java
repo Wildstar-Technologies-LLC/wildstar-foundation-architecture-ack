@@ -44,6 +44,8 @@
  */
 package com.wildstartech.wfa.logistics.ltl;
 
+import com.wildstartech.wfa.logistics.ltl.quote.SimpleQuote;
+
 public class MockSimpleQuote extends MockQuickQuote implements SimpleQuote {
 	private boolean assemblyRequired=false;
 	private boolean blanketWrapRequired=false;

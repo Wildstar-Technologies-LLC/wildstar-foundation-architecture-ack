@@ -46,6 +46,7 @@ package com.wildstartech.wfa.logistics.ltl;
 
 import com.wildstartech.wfa.journal.JournalEntry;
 import com.wildstartech.wfa.logistics.ltl.pricemodels.PriceModel;
+import com.wildstartech.wfa.logistics.ltl.quote.QuickQuote;
 import com.wildstartech.wfa.ticketing.MockBasicTicket;
 
 public class MockQuickQuote extends MockBasicTicket implements QuickQuote {

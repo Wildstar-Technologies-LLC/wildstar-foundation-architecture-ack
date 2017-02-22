@@ -45,6 +45,8 @@
  */
 package com.wildstartech.wfa.logistics.ltl;
 
+import com.wildstartech.wfa.logistics.ltl.quote.QuoteLineItem;
+
 public class MockQuoteLineItem 
 extends MockEditableCommodityLineItem
 implements QuoteLineItem {

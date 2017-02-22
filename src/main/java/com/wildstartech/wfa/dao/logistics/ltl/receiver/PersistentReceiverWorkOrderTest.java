@@ -47,9 +47,7 @@ package com.wildstartech.wfa.dao.logistics.ltl.receiver;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
-import com.wildstartech.wfa.dao.logistics.ltl.PersistentReceiverWorkOrder;
-import com.wildstartech.wfa.dao.logistics.ltl.ReceiverWorkOrderDAO;
-import com.wildstartech.wfa.dao.logistics.ltl.ReceiverWorkOrderDAOFactory;
+import com.wildstartech.wfa.dao.logistics.ltl.receiver.ReceiverWorkOrderDAO;
 
 public class PersistentReceiverWorkOrderTest {
    private ReceiverWorkOrderDAO dao;

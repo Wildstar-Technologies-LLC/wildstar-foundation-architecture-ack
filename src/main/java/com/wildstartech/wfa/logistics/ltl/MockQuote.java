@@ -47,6 +47,9 @@ package com.wildstartech.wfa.logistics.ltl;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.wildstartech.wfa.logistics.ltl.quote.Quote;
+import com.wildstartech.wfa.logistics.ltl.quote.QuoteLineItem;
+
 public class MockQuote extends MockSimpleQuote implements Quote {
 	private double accessorialTotal=0;
 	private double lineItemCharges=0;

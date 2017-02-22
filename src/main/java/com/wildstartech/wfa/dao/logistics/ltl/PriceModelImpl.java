@@ -46,8 +46,8 @@ package com.wildstartech.wfa.dao.logistics.ltl;
 
 import java.util.logging.Logger;
 
-import com.wildstartech.wfa.logistics.ltl.QuickQuote;
 import com.wildstartech.wfa.logistics.ltl.pricemodels.PriceModel;
+import com.wildstartech.wfa.logistics.ltl.quote.QuickQuote;
 
 public abstract class PriceModelImpl implements PriceModel {
   private static final String _CLASS=PriceModelImpl.class.getName();

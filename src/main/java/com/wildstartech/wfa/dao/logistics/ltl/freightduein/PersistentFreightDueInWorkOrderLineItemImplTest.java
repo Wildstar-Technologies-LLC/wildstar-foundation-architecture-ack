@@ -44,7 +44,7 @@
  */
 package com.wildstartech.wfa.dao.logistics.ltl.freightduein;
 
-import com.wildstartech.wfa.dao.logistics.ltl.FreightDueInWorkOrderLineItemDAO;
+import com.wildstartech.wfa.dao.logistics.ltl.freight.FreightDueInWorkOrderLineItemDAO;
 
 public class PersistentFreightDueInWorkOrderLineItemImplTest {
    FreightDueInWorkOrderLineItemDAO dao=null;

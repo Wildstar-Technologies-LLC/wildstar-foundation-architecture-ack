@@ -46,9 +46,9 @@ package com.wildstartech.wfa.dao.logistics.ltl.freightduein;
 
 import org.testng.annotations.Test;
 
-import com.wildstartech.wfa.dao.logistics.ltl.FreightDueInWorkOrderDAO;
-import com.wildstartech.wfa.dao.logistics.ltl.FreightDueInWorkOrderDAOFactory;
-import com.wildstartech.wfa.logistics.ltl.FreightDueInWorkOrder;
+import com.wildstartech.wfa.dao.logistics.ltl.freight.FreightDueInWorkOrderDAO;
+import com.wildstartech.wfa.dao.logistics.ltl.freight.FreightDueInWorkOrderDAOFactory;
+import com.wildstartech.wfa.logistics.ltl.freight.FreightDueInWorkOrder;
 
 public class PersistentFreightDueInWorkOrderImplTest {
    private FreightDueInWorkOrderDAO dao=null;

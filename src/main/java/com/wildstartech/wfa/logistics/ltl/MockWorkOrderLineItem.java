@@ -46,6 +46,8 @@ package com.wildstartech.wfa.logistics.ltl;
 
 import java.text.NumberFormat;
 
+import com.wildstartech.wfa.logistics.ltl.workorder.WorkOrderLineItem;
+
 public class MockWorkOrderLineItem 
 extends MockEditableCommodityLineItem
 implements WorkOrderLineItem {

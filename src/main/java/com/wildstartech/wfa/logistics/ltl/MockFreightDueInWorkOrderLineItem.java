@@ -44,6 +44,8 @@
  */
 package com.wildstartech.wfa.logistics.ltl;
 
+import com.wildstartech.wfa.logistics.ltl.freight.FreightDueInWorkOrderLineItem;
+
 public class MockFreightDueInWorkOrderLineItem 
 extends MockEditableCommodityLineItem 
 implements FreightDueInWorkOrderLineItem {

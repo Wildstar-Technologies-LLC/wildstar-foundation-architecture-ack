@@ -46,11 +46,11 @@ package com.wildstartech.wfa.logistics.ltl.pricemodel;
 
 import java.util.logging.Logger;
 
-import com.wildstartech.wfa.logistics.ltl.QuickQuote;
-import com.wildstartech.wfa.logistics.ltl.Quote;
-import com.wildstartech.wfa.logistics.ltl.SimpleQuote;
-import com.wildstartech.wfa.logistics.ltl.WorkOrder;
 import com.wildstartech.wfa.logistics.ltl.pricemodels.CubeDistancePriceModel;
+import com.wildstartech.wfa.logistics.ltl.quote.QuickQuote;
+import com.wildstartech.wfa.logistics.ltl.quote.Quote;
+import com.wildstartech.wfa.logistics.ltl.quote.SimpleQuote;
+import com.wildstartech.wfa.logistics.ltl.workorder.WorkOrder;
 
 public class CubeDistancePriceModelImpl extends PriceModelImpl implements CubeDistancePriceModel {
 	/** Used in object serialization. */

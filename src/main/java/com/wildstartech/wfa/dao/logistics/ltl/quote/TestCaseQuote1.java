@@ -48,7 +48,7 @@ import com.wildstartech.wfa.dao.logistics.ltl.TestCaseAccessorialCharge1;
 import com.wildstartech.wfa.dao.logistics.ltl.TestCaseAccessorialCharge2;
 import com.wildstartech.wfa.logistics.ltl.AccessorialCharge;
 import com.wildstartech.wfa.logistics.ltl.MockQuote;
-import com.wildstartech.wfa.logistics.ltl.QuoteLineItem;
+import com.wildstartech.wfa.logistics.ltl.quote.QuoteLineItem;
 
 public class TestCaseQuote1 extends MockQuote {
 	public TestCaseQuote1() {

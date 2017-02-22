@@ -50,14 +50,11 @@ import org.testng.annotations.Test;
 
 import com.wildstartech.wfa.dao.UserData;
 import com.wildstartech.wfa.dao.WildDAOTest;
-import com.wildstartech.wfa.dao.logistics.ltl.PersistentReceiverWorkOrder;
-import com.wildstartech.wfa.dao.logistics.ltl.ReceiverWorkOrderDAO;
-import com.wildstartech.wfa.dao.logistics.ltl.ReceiverWorkOrderDAOFactory;
 import com.wildstartech.wfa.dao.user.UserContext;
 import com.wildstartech.wfa.dao.user.UserContextDAOFactory;
 import com.wildstartech.wfa.logistics.WarehouseLocation;
-import com.wildstartech.wfa.logistics.ltl.ReceiverWorkOrder;
-import com.wildstartech.wfa.logistics.ltl.ReceiverWorkOrderLineItem;
+import com.wildstartech.wfa.logistics.ltl.receiver.ReceiverWorkOrder;
+import com.wildstartech.wfa.logistics.ltl.receiver.ReceiverWorkOrderLineItem;
 
 public class ReceiverWorkOrderDAOTest extends WildDAOTest {
    // Utility methods

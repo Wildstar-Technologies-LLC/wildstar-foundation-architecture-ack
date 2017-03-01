@@ -63,6 +63,7 @@ public class MockQuickQuote extends MockBasicTicket implements QuickQuote {
 	private AdjustmentType adjustmentType=null;
 	private JournalEntry newJournalEntry=null;
 	private PriceModel priceModel=null;
+	private QuoteMethod quoteMethod=QuoteMethod.ByWeight;
 	private String contactCompanyName="";
 	private String contactEmail="";
 	private String contactName="";
@@ -258,7 +259,34 @@ public class MockQuickQuote extends MockBasicTicket implements QuickQuote {
 	public void setPriceModel(PriceModel model) {
 		this.priceModel=model;
 	}
+	
+	//***** quoteMethod
+	public String getQuoteMethodLabel() {
+	   String label;
+	   if (this.quoteMethod == QuoteMethod.ByCube) {
+	      label="By Cube";
+	   } else {
+	      label="By Weight";
+	   } // END if (this.quoteMethod == QuoteMethod.ByCube)
+	   return label;
+	}
 
+	public QuoteMethod getQuoteMethod() {
+	   return this.quoteMethod;
+	}
+	public void setQuoteMethod(QuoteMethod method) {
+	   this.quoteMethod=method;
+	}
+	public void setQuoteMethod(String method) {
+	   if (
+	         (method != null) &&
+	         (method.equals("By Cube")) 
+	      ) {
+	      this.quoteMethod=QuoteMethod.ByCube;
+	   } else {
+	      this.quoteMethod=QuoteMethod.ByWeight;
+	   } // END if ((method != null) ...
+	}
 	//***** serviceLevel
 	@Override
 	public String getServiceLevel() {

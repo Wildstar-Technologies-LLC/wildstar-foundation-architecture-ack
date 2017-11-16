@@ -74,7 +74,7 @@ public class PriceModelFactoryImpl extends PriceModelFactory {
   @Override
   public PriceModel getDefaultModel() {
     logger.entering(_CLASS,"getDefaultModel()");
-    PriceModel pm=new CubeDistancePriceModelImpl();
+    PriceModel pm=new MockCubeDistancePriceModel();
     logger.exiting(_CLASS,"getDefaultModel()",pm);
     return pm;
   }
@@ -111,11 +111,11 @@ public class PriceModelFactoryImpl extends PriceModelFactory {
     
     if (modelName != null) {
       if (modelName.equalsIgnoreCase(MODEL_NAMES_CUBE_DISTANCE)) {
-        pm=new CubeDistancePriceModelImpl();
+        pm=new MockCubeDistancePriceModel();
       } else if (
           modelName.equalsIgnoreCase(MODEL_NAMES_CUBE_DISTANCE_DISCOUNT)
                 ) {
-        cpm=new CubeDistancePriceModelImpl();
+        cpm=new MockCubeDistancePriceModel();
         pm=cpm;
         cpm.setBaseCharge(cpm.getBaseCharge() * .85);        
       } // END if (modelName.equalsIgnoreCase( ...
@@ -134,7 +134,7 @@ public class PriceModelFactoryImpl extends PriceModelFactory {
     PriceModel pm=null;
     if (supportedType != null) {
       if (supportedType.equalsIgnoreCase(CubeDistancePriceModel.TYPE)) {
-        pm=new CubeDistancePriceModelImpl();
+        pm=new MockCubeDistancePriceModel();
       } // END if (supportedType.equalsIgnoreCase(CubeDistancePriceModel.TYPE))
     } else {
       logger.warning("The supportedType parameter is null.");

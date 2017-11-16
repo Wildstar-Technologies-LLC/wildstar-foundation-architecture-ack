@@ -49,14 +49,14 @@ import java.util.logging.Logger;
 import com.wildstartech.wfa.logistics.ltl.pricemodels.PriceModel;
 import com.wildstartech.wfa.logistics.ltl.quote.QuickQuote;
 
-public abstract class PriceModelImpl implements PriceModel {
-  private static final String _CLASS=PriceModelImpl.class.getName();
+public abstract class MockPriceModel implements PriceModel {
+  private static final String _CLASS=MockPriceModel.class.getName();
   private static final Logger logger=Logger.getLogger(_CLASS);
   
   private boolean defaultModel=false;
   private String label=null; 
   
-  public PriceModelImpl() {
+  public MockPriceModel() {
     logger.entering(_CLASS, "PriceModelImpl()");
     logger.exiting(_CLASS, "PriceModelImpl()");
   }

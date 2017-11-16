@@ -52,12 +52,13 @@ import com.wildstartech.wfa.logistics.ltl.quote.Quote;
 import com.wildstartech.wfa.logistics.ltl.quote.SimpleQuote;
 import com.wildstartech.wfa.logistics.ltl.workorder.WorkOrder;
 
-public class CubeDistancePriceModelImpl extends PriceModelImpl implements CubeDistancePriceModel {
+public class MockCubeDistancePriceModel extends MockPriceModel implements CubeDistancePriceModel {
 	/** Used in object serialization. */
-	private static final String _CLASS = CubeDistancePriceModelImpl.class.getName();
+	private static final String _CLASS = MockCubeDistancePriceModel.class.getName();
 	private static final Logger logger = Logger.getLogger(_CLASS);
 
 	private int mileageInterval = 0;
+	private int mileageMax = 0;
 	private int minCube = 0;
 	private double baseCharge = 0;
 	private double cubeDiscount = 0;
@@ -68,18 +69,19 @@ public class CubeDistancePriceModelImpl extends PriceModelImpl implements CubeDi
 	/**
 	 * Default, no-argument constructor.
 	 */
-	public CubeDistancePriceModelImpl() {
+	public MockCubeDistancePriceModel() {
 		logger.entering(_CLASS, "CubeDistancePriceModelImpl()");
 		logger.exiting(_CLASS, "CubeDistancePriceModelImpl()");
 	}
 
 	// ***** label
+	@Override
 	public String getLabel() {
 		logger.entering(_CLASS, "getLabel()");
 		logger.exiting(_CLASS, "getLabel()", this.label);
 		return this.label;
 	}
-
+	@Override
 	public void setLabel(String label) {
 		logger.entering(_CLASS, "setLabel(String)", label);
 		if (label != null) {
@@ -96,7 +98,7 @@ public class CubeDistancePriceModelImpl extends PriceModelImpl implements CubeDi
 		logger.exiting(_CLASS, "getMileageInterval()", this.mileageInterval);
 		return this.mileageInterval;
 	}
-
+	@Override
 	public void setMileageInterval(int mileageInterval) {
 		logger.entering(_CLASS, "setMileageInterval(int)", mileageInterval);
 		this.mileageInterval = mileageInterval;
@@ -104,12 +106,13 @@ public class CubeDistancePriceModelImpl extends PriceModelImpl implements CubeDi
 	}
 
 	// ***** minCube
+	@Override
 	public int getMinCube() {
 		logger.entering(_CLASS, "getMinCube()");
 		logger.exiting(_CLASS, "getMinCube()", this.minCube);
 		return this.minCube;
 	}
-
+	@Override
 	public void setMinCube(int minCube) {
 		logger.entering(_CLASS, "setMinCube(int)", minCube);
 		this.minCube = minCube;
@@ -117,6 +120,7 @@ public class CubeDistancePriceModelImpl extends PriceModelImpl implements CubeDi
 	}
 
 	// ***** baseCharge
+	@Override
 	public double getBaseCharge() {
 		logger.entering(_CLASS, "getBaseCharge()");
 		logger.exiting(_CLASS, "getBaseCharge()", this.baseCharge);
@@ -130,6 +134,7 @@ public class CubeDistancePriceModelImpl extends PriceModelImpl implements CubeDi
 	 * @param mileage
 	 * @return
 	 */
+	@Override
 	public double getBaseCharge(int cube, double mileage) {
 		logger.entering(_CLASS, "getBaseCharge(int)", cube);
 		double computedBaseCharge = 0;
@@ -172,6 +177,7 @@ public class CubeDistancePriceModelImpl extends PriceModelImpl implements CubeDi
 	 * @param cube
 	 * @return
 	 */
+	@Override
 	public double getBaseCubeCharge(int cube) {
 		logger.entering(_CLASS, "getBaseCubeCharge(int)", cube);
 		double baseCharge;
@@ -200,46 +206,65 @@ public class CubeDistancePriceModelImpl extends PriceModelImpl implements CubeDi
 		logger.exiting(_CLASS, "getBaseCubeCharge(int)", baseCharge);
 		return computedBaseCharge;
 	}
-
+	@Override
 	public void setBaseCharge(double baseCharge) {
 		logger.entering(_CLASS, "setBaseCharge(double)", baseCharge);
 		this.baseCharge = baseCharge;
 		logger.exiting(_CLASS, "setBaseCharge(double)");
 	}
-
+	@Override
 	// ***** cubeDiscount
 	public double getCubeDiscount() {
 		logger.entering(_CLASS, "getCubeDiscount()");
 		logger.exiting(_CLASS, "getCubeDiscount()", this.cubeDiscount);
 		return this.cubeDiscount;
 	}
-
+	@Override
 	public void setCubeDiscount(double cubeDiscount) {
 		logger.entering(_CLASS, "setCubeDiscount(double)", cubeDiscount);
 		this.cubeDiscount = cubeDiscount;
 		logger.exiting(_CLASS, "setCubeDiscount(double)");
 	}
 
+	// ***** mileageMax
+	@Override
+	public int getMileageMax() {
+		logger.entering(_CLASS, "getMileageMax()");
+		logger.exiting(_CLASS, "getMileageMax()", this.mileageMax);
+		return this.mileageMax;
+	}
+	@Override
+	public void setMileageMax(int mileageMax) {
+		logger.entering(_CLASS, "setMileageMax(int)", mileageMax);
+		if (mileageMax < 0) {
+			this.mileageMax = 0;
+		} else {
+			this.mileageMax = mileageMax;
+		} // END if (mileageMax < 0)
+		logger.exiting(_CLASS, "setMileageMax(int)");
+	}
+
 	// ***** mileageStep
+	@Override
 	public double getMileageStep() {
 		logger.entering(_CLASS, "getMileageStep()");
 		logger.exiting(_CLASS, "getMileageStep()", this.mileageStep);
 		return this.mileageStep;
 	}
-
+	@Override
 	public void setMileageStep(double mileageStep) {
 		logger.entering(_CLASS, "setMileageStep(double)", mileageStep);
 		this.mileageStep = mileageStep;
 		logger.exiting(_CLASS, "setMileageStep(double)");
 	}
-
+	@Override
 	// ***** minCubeCharge
 	public double getMinCubeCharge() {
 		logger.entering(_CLASS, "getMinCubeCharge()");
 		logger.exiting(_CLASS, "getMinCubeCharge()", this.minCubeCharge);
 		return this.minCubeCharge;
 	}
-
+	@Override
 	public void setMinCubeCharge(double minCubeCharge) {
 		logger.entering(_CLASS, "setMinCubeCharge(double)", minCubeCharge);
 		this.minCubeCharge = minCubeCharge;
@@ -254,6 +279,7 @@ public class CubeDistancePriceModelImpl extends PriceModelImpl implements CubeDi
 	 * @param mileage
 	 * @return
 	 */
+	@Override
 	public double calculateCharge(int cube, double mileage) {
 		logger.entering(_CLASS, "calculateCharge(int,int)", new Object[] { cube, mileage });
 		int minCube = 0;
@@ -262,8 +288,8 @@ public class CubeDistancePriceModelImpl extends PriceModelImpl implements CubeDi
 		// Calculate the base charge.
 		baseCharge = getBaseCharge(cube, mileage);
 		/*
-		 * Determine if the specified cube meets the minimum. If it does not,
-		 * then adjust the cube to relfect the minimum.
+		 * Determine if the specified cube meets the minimum. If it does not, then
+		 * adjust the cube to relfect the minimum.
 		 */
 		minCube = getMinCube();
 		if (cube < minCube)
@@ -272,7 +298,7 @@ public class CubeDistancePriceModelImpl extends PriceModelImpl implements CubeDi
 		logger.exiting(_CLASS, "calculateCharge(int,int)", charge);
 		return charge;
 	}
-	
+
 	@Override
 	public double calculateTotalCharges(QuickQuote quote) {
 		logger.entering(_CLASS, "calculateCharge(Quote)", quote);
@@ -289,7 +315,7 @@ public class CubeDistancePriceModelImpl extends PriceModelImpl implements CubeDi
 		logger.exiting(_CLASS, "calculateCharge(Quote)", charges);
 		return charges;
 	}
-	
+
 	@Override
 	public double calculateTotalCharges(SimpleQuote quote) {
 		logger.entering(_CLASS, "calculateCharge(SimpleQuote)", quote);
@@ -305,7 +331,7 @@ public class CubeDistancePriceModelImpl extends PriceModelImpl implements CubeDi
 		logger.exiting(_CLASS, "calculateCharge(SimpleQuote)", charges);
 		return charges;
 	}
-	
+
 	@Override
 	public double calculateTotalCharges(WorkOrder workOrder) {
 		// TODO Auto-generated method stub
